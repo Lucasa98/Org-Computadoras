@@ -1,0 +1,102 @@
+$date
+	Tue Sep 26 10:22:28 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module contador_tb $end
+$var wire 16 ! pc [15:0] $end
+$var reg 1 " clk $end
+$var reg 16 # pcNext [15:0] $end
+$var integer 32 $ i [31:0] $end
+$scope module UUT $end
+$var wire 1 " clk $end
+$var wire 16 % pc [15:0] $end
+$var wire 16 & pcNext [15:0] $end
+$var reg 16 ' count_reg [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 '
+b0 &
+b0 %
+b1100100 $
+b0 #
+0"
+b0 !
+$end
+#50000
+b100 !
+b100 %
+b100 '
+1"
+#100000
+0"
+#150000
+b1000 !
+b1000 %
+b1000 '
+1"
+#200000
+0"
+#250000
+b1100 !
+b1100 %
+b1100 '
+1"
+#300000
+0"
+#350000
+b10000 !
+b10000 %
+b10000 '
+1"
+#400000
+0"
+#450000
+b10100 !
+b10100 %
+b10100 '
+1"
+#500000
+0"
+#550000
+b11000 !
+b11000 %
+b11000 '
+1"
+#600000
+0"
+#650000
+b11100 !
+b11100 %
+b11100 '
+1"
+#700000
+0"
+#750000
+b100000 !
+b100000 %
+b100000 '
+1"
+#800000
+0"
+#850000
+b100100 !
+b100100 %
+b100100 '
+1"
+#900000
+0"
+#950000
+b101000 !
+b101000 %
+b101000 '
+1"
+#1000000
+0"
