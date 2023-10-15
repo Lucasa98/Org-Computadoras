@@ -1,14 +1,14 @@
 module aluDeco(
-    input [5:0] op,
+    input wire op,
     input wire f7,
     input [2:0] f3,
     input [1:0] aluOp,
     output [2:0] aluControl
 );
 
-reg [2:0] aluControlAux = 0;
+reg[2:0] aluControlAux = 3'b000;
 
-always @()
+always @(*)
 begin
     case (aluOp)
         2'b00:
@@ -17,23 +17,23 @@ begin
             aluControlAux = 3'b001; //substract
         2'b10:
             case(f3)
-                3'000:
-                    if(f7 != 2'b11)begin
+                3'b000:
+                    if(f7 && op)
+                    begin
                         aluControlAux = 3'b000; //add
                     end else begin
-                        aluControlAux = 3'001;  //substract
+                        aluControlAux = 3'b001;  //substract
                     end
-                3'010:
+                3'b010:
                     aluControlAux = 3'b101;     //set less than
-                3'110:
+                3'b110:
                     aluControlAux = 3'b011;     //or
-                3'111:
+                3'b111:
                     aluControlAux = 3'b010;     //and
             endcase
     endcase
-
-    assign aluControl = aluControlAux;
 end
 
+assign aluControl = aluControlAux;
 
 endmodule
