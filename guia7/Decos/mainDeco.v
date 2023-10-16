@@ -1,7 +1,7 @@
 module mainDeco(
     input [6:0] op,
     output wire branch,
-    output [1:0] resSrc,
+    output wire resSrc,
     output wire memWrite,
     output wire aluSrc,
     output [1:0] inmSrc,
@@ -10,7 +10,7 @@ module mainDeco(
 );
 
 reg branchAux = 0;
-reg [1:0] resSrcAux = 0;
+reg resSrcAux = 0;
 reg memWriteAux = 0;
 reg aluSrcAux = 0;
 reg [1:0] inmSrcAux = 0;

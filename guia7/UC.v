@@ -8,7 +8,7 @@ module UC(
     input wire zero,
     output wire pcSrc,
     output wire branch,
-    output [1:0] resSrc,
+    output wire resSrc,
     output wire memWrite,
     output [2:0] ALUcontrol,
     output wire aluSrc,

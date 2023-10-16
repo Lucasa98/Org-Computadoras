@@ -8,16 +8,19 @@
 module dataPath(
     //Entradas
     input wire clk,         //magia
-    input [31:0] instr,     //de la memoria?
-    input [31:0] readData,  //de la memoria?
+    input [31:0] instr,     //de la memoria
+    input [31:0] readData,  //de la memoria
     input wire pcSrc,       //de la UC
-    input wire resSrc,      //de la UC
-    input wire memWrite,    //de la UC
+    input wire resSrc,      //de la UC  (para el jal necesita 2 bits)
+    //input wire memWrite,  //de la UC  ---En realidad va directo a la memoria---
     input [2:0] ALUControl, //de la UC
     input wire ALUSrc,      //de la UC
     input [1:0] inmSrc,     //de la UC
     input wire regWrite,    //de la UC
     //Salidas
+    output [15:0] pc,       //a la memoria
+    output [15:0] address,  //a la memoria
+    output [31:0] writeData,//a la memoria
     output wire zero,       //a la UC
     output wire f7,         //a la UC
     output [2:0] f3,        //a la UC
@@ -26,8 +29,8 @@ module dataPath(
 
 // ---------- Cableciños ----------
 wire[15:0] pcNext = 0;  //multPC    -> pc
-wire[15:0] pc = 0;      //pc        -> IM, PCadd4, PCaddImm
-wire[31:0] wd3 = 0;     //multData  -> BR
+wire[15:0] pcAux = 0;   //pc        -> IM, PCadd4, PCaddImm
+wire[31:0] wd3 = 0;     //multData  -> memoria
 wire[31:0] rd1 = 0;     //BR        -> ALU
 wire[31:0] rd2 = 0;     //BR        -> multSrcB, DM
 wire[31:0] immExt = 0;  //SE        -> multSrcB, PCaddImm
@@ -44,7 +47,7 @@ reg[31:0] cuatro = 3'b100;
 PC Pcounter(
     .clk(clk),
     .pcNext(pcNext),
-    .pc(pc)
+    .pc(pcAux)
 );
 
 BR regBank(
@@ -73,13 +76,13 @@ ALU ALU1(
 );
 
 Adder PCadd4(
-    .op1({16'b0,pc}),
+    .op1({16'b0,pcAux}),
     .op2(cuatro),
     .res(add4)
 );
 
 Adder PCaddImm(
-    .op1({16'b0,pc}),
+    .op1({16'b0,pcAux}),
     .op2(immExt),
     .res(addImm)
 );
@@ -105,9 +108,12 @@ Mu multData(
     .sal(wd3)
 );
 
-always @(*)
-begin
-    
-end
+assign pc = pcAux;
+assign address = ALUres;
+assign writeData = rd2;
+assign zero = 0;
+assign f7 = instr[30];
+assign f3 = instr[14:12];
+assign op = instr[6:0];
 
 endmodule
