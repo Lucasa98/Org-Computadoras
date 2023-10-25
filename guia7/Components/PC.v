@@ -9,15 +9,16 @@ module PC(
     output [15:0] pc
 );
 
-reg[15:0] count_reg = 16'h0;
+reg[15:0] count_reg;
+
+initial
+begin
+    count_reg=0;
+end
 
 always @(posedge clk)
 begin
-    if(pcNext != 16'h0000)
-    begin
-        count_reg <= pcNext;
-    end
-    count_reg <= count_reg + 4;
+    count_reg <= pcNext;
 end
 assign pc = count_reg;
 

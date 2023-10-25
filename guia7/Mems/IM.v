@@ -12,8 +12,8 @@ reg [ROM_WIDTH-1:0] ROM [(2**ROM_ADDR_BITS)-1:0];
 
 initial begin
     // LAS INSTRUCCIONES:
-    //ROM[0] = 32'h00300413;
-    //ROM[1] = 32'h00100493;
+    ROM[0] = 32'h00300413;//addi que suma 1 al registro 16(10000) y lo guarda en 4(00100)
+    ROM[1] = 32'h00100493;//anda a saber
     //...
 end
 

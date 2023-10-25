@@ -19,8 +19,8 @@ module mem(
 // ---------- ---------- ----------
 
 IM instrMem(
-    .address(pc),
-    .rd(instr)
+    .pc(pc),
+    .instr(instr)
 );
 
 DM dataMem(
