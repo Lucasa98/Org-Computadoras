@@ -3,7 +3,6 @@
     src=1 => S-Type
 );*/
 module SE(
-    input wire clk,
     input [31:0] instr,
     input [1:0] src,
     output [31:0] immExt
@@ -11,7 +10,7 @@ module SE(
 
 reg[31:0] immaux;
 
-always @(posedge clk)
+always @(*)
 begin
     case(src)
         2'b00:  //I-Type

@@ -40,6 +40,9 @@ wire[31:0] s_srcB;    //multSrcB  -> ALU
 wire[31:0] s_ALUres;  //ALU       -> DM, multData
 wire[15:0] s_add4;    //PCadd4    -> multPC
 wire[31:0] s_addImm;  //PCaddImm  -> multPC
+
+wire[31:0] DEBUGx0;
+wire[31:0] DEBUGx8;
 // ---------- ---------- ----------
 
 // -------- Varibles --------
@@ -60,11 +63,12 @@ BR regBank(
     .wd3(s_wd3),
     .we(regWrite),
     .rd1(s_rd1),
-    .rd2(s_rd2)
+    .rd2(s_rd2),
+    .DEBUGx0(DEBUGx0),
+    .DEBUGx8(DEBUGx8)
 );
 
 SE sExt(
-    .clk(clk),
     .instr(instr),
     .src(inmSrc),
     .immExt(s_immExt)
