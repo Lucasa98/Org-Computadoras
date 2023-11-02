@@ -32,6 +32,10 @@ begin
     end
     //bla
 end
+
+always@(*)
+    regBank[0] <= 0;
+
 assign rd1 = regBank[a1];
 assign rd2 = regBank[a2];
 
