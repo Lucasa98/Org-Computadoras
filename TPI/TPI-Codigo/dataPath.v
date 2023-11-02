@@ -63,9 +63,7 @@ BR regBank(
     .wd3(s_wd3),
     .we(regWrite),
     .rd1(s_rd1),
-    .rd2(s_rd2),
-    .DEBUGx0(DEBUGx0),
-    .DEBUGx8(DEBUGx8)
+    .rd2(s_rd2)
 );
 
 SE sExt(

@@ -11,9 +11,7 @@ module BR(
     input [31:0] wd3,
     input wire we,
     output [31:0] rd1,
-    output [31:0] rd2,
-    output [31:0] DEBUGx0,
-    output [31:0] DEBUGx8
+    output [31:0] rd2
 );
 
 reg [31:0] regBank[31:0];
@@ -36,12 +34,10 @@ begin
 end
 
 always@(*)
-regBank[0] <= 0;
+    regBank[0] <= 0;
 
 assign rd1 = regBank[a1];
 assign rd2 = regBank[a2];
-assign DEBUGx0 = regBank[0];
-assign DEBUGx8 = regBank[8];
 
 endmodule
 //Banco de registros
