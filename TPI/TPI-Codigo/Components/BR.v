@@ -32,10 +32,13 @@ begin
     end
     //bla
 end
+<<<<<<< HEAD
 
 always@(*)
     regBank[0] <= 0;
 
+=======
+>>>>>>> parent of b6ca6a3 (.)
 assign rd1 = regBank[a1];
 assign rd2 = regBank[a2];
 
