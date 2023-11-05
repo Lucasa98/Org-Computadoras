@@ -2,6 +2,7 @@ module ALU(
     input [31:0] srcA,
     input [31:0] srcB,
     input [2:0] ALUControl,
+    output wire zero,
     output [31:0] res
 );
 
@@ -23,6 +24,7 @@ begin
     endcase
 end
 
+assign zero = 0;
 assign res = aux;
 
 endmodule

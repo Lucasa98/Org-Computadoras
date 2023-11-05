@@ -11,6 +11,7 @@ parameter ROM_ADDR_BITS = 5;
 reg [ROM_WIDTH-1:0] ROM [(2**ROM_ADDR_BITS)-1:0];
 
 initial begin
+<<<<<<< Updated upstream
    ROM[0] = 32'h100105b7
    ROM[1] = 32'h0005a283
    ROM[2] = 32'h00a00313
@@ -46,6 +47,9 @@ initial begin
    ROM[32] = 32'h00138393
    ROM[33] = 32'hff5ff06f
     /* // LAS INSTRUCCIONES:
+=======
+    // LAS INSTRUCCIONES:
+>>>>>>> Stashed changes
     // addi x8,x0,3
     //imm[31:20] = 3
     //rs1[19:15] = 00000
@@ -65,7 +69,7 @@ initial begin
     ROM[20] = 32'b00000000000000000000000000010011;
     //addi x8,x8,2
     ROM[24] = 32'b00000000000001000000010000010011;
-    //...*/
+    //...
 end
 
 assign instr = ROM[pc];

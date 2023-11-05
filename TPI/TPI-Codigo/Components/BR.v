@@ -33,7 +33,7 @@ begin
     //bla
 end
 
-always@(*)
+always @(*)
     regBank[0] <= 0;
 
 assign rd1 = regBank[a1];
