@@ -15,12 +15,15 @@ module mem(
 );
 
 // ---------- Cableciños ----------
-
+wire[31:0] DEBUGinstr16;
+wire[31:0] DEBUGinstr20;
 // ---------- ---------- ----------
 
 IM instrMem(
     .pc(pc),
-    .instr(instr)
+    .instr(instr),
+    .DEBUGinstr16(DEBUGinstr16),
+    .DEBUGinstr20(DEBUGinstr20)
 );
 
 DM dataMem(

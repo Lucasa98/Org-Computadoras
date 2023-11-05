@@ -82,6 +82,7 @@ begin
 end
 
 assign branch = branchAux;
+assign jump = jumpAux;
 assign resSrc = resSrcAux;
 assign memWrite = memWriteAux;
 assign aluSrc = aluSrcAux;
