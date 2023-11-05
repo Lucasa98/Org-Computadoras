@@ -32,7 +32,7 @@ wire[2:0] f3;        //a la UC
 wire[6:0] op;         //a la UC
 
 //-- Instantiate the unit to test
-dataPath UUT (
+/*dataPath UUT (
           .clk(clk),
           .instr(instr),
           .readData(readData),
@@ -50,8 +50,7 @@ dataPath UUT (
           .f3(f7),
           .op(op)
          );
-
-integer i;
+*/
 
 initial begin
 
@@ -62,7 +61,7 @@ initial begin
     // Queremos implementar la instruccion
     // addi x8,x0,3
     // addi x8,x8,3
-
+/*
     #0
     // addi x8,x0,3
     //imm[31:20] = 3
@@ -107,7 +106,7 @@ initial begin
     ALUSrc = 1;     //toma el inm
     inmSrc = 0;     //tipo I
     regWrite = 1;   //escribe en el BR
-
+*/
    #(DURATION) $display("End of simulation");
   $finish;
 end

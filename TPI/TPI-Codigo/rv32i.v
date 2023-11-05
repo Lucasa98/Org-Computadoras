@@ -12,49 +12,52 @@ module rv32i(
 );
 
 // ---------- Cableciños ----------
-wire pcSrc;
-wire[6:0] op;
-wire[2:0] f3;
-wire f7;
-wire regWrite;
-wire[1:0] inmSrc;
-wire ALUSrc;
-wire[2:0] ALUControl;
-wire Zero;
-wire resSrc;
+wire[6:0] s_op;
+wire[2:0] s_f3;
+wire s_f7;
+wire s_zero;
+wire s_branch;
+wire s_jump=0;
+wire[1:0] s_resSrc;
+wire[2:0] s_ALUControl;
+wire s_ALUSrc;
+wire[1:0] s_immSrc;
+wire s_regWrite;
 // ---------- ---------- ----------
 
 UC unitControl(
-    .f7(f7),
-    .f3(f3),
-    .op(op),
-    .zero(Zero),
-    .pcSrc(pcSrc),
-    .resSrc(resSrc),
+    .f7(s_f7),
+    .f3(s_f3),
+    .op(s_op),
+    .zero(s_zero),
+    .branch(s_branch),
+    .jump(s_jump),
+    .resSrc(s_resSrc),
     .memWrite(WE),
-    .ALUcontrol(ALUControl),
-    .aluSrc(ALUSrc),
-    .inmSrc(inmSrc),
-    .regWrite(regWrite)
+    .ALUcontrol(s_ALUControl),
+    .aluSrc(s_ALUSrc),
+    .immSrc(s_immSrc),
+    .regWrite(s_regWrite)
 );
 
 dataPath DataPath(
     .clk(clk),
     .instr(instr),
     .readData(readData),
-    .pcSrc(pcSrc),
-    .resSrc(resSrc),
-    .ALUControl(ALUControl),
-    .ALUSrc(ALUSrc),
-    .inmSrc(inmSrc),
-    .regWrite(regWrite),
+    .branch(s_branch),
+    .jump(s_jump),
+    .resSrc(s_resSrc),
+    .ALUControl(s_ALUControl),
+    .ALUSrc(s_ALUSrc),
+    .immSrc(s_immSrc),
+    .regWrite(s_regWrite),
     .pc(pc),
     .address(address),
     .writeData(writeData),
-    .zero(Zero),
-    .f7(f7),
-    .f3(f3),
-    .op(op)
+    .zero(s_zero),
+    .f7(s_f7),
+    .f3(s_f3),
+    .op(s_op)
 );
 
 endmodule

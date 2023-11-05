@@ -36,49 +36,42 @@ rv32i UUT (
 );
 
 initial begin
-
   //-- File were to store the simulation results
   $dumpfile(`DUMPSTR(`VCD_OUTPUT));
   $dumpvars(0, rv32i_tb);
-    
-    // Queremos implementar la instruccion
-    // addi x8,x0,3
-    // addi x8,x8,3
 
-    #0
-    // addi x8,x0,3
-    //imm[31:20] = 3
-    //rs1[19:15] = 00000
-    //funct3[14:12] = 0
-    //rd[11:7] = 01000
-    //opcode[6:0] = 0010011
-    instr = 32'b00000000001100000000010000010011;
+  // Queremos implementar la instruccion
+  // addi x8,x0,3
+  // addi x8,x8,3
+  #0
+  // addi x8,x0,3
+  //imm[31:20] = 3
+  //rs1[19:15] = 00000
+  //funct3[14:12] = 0
+  //rd[11:7] = 01000
+  //opcode[6:0] = 0010011
+  instr = 32'b00000000001100000000010000010011;
+  #1
+  //nop
+  instr = 32'b00000000000000000000000000010011;
+  #1
+  //addi x8,x8,3
+  instr = 32'b00000000001101000000010000010011;
+  #1
+  //nop
+  instr = 32'b00000000000000000000000000010011;
+  #1
+  //addi x8,x8,2
+  instr = 32'b00000000001001000000010000010011;
+  #1
+  //nop
+  instr = 32'b00000000000000000000000000010011;
+  #1
+  //addi x8,x8,2
+  instr = 32'b00000000000001000000010000010011;
 
-    #1
-    //nop
-    instr = 32'b00000000000000000000000000010011;
 
-    #1
-    //addi x8,x8,3
-    instr = 32'b00000000001101000000010000010011;
-
-    #1
-    //nop
-    instr = 32'b00000000000000000000000000010011;
-
-    #1
-    //addi x8,x8,2
-    instr = 32'b00000000001001000000010000010011;
-
-    #1
-    //nop
-    instr = 32'b00000000000000000000000000010011;
-
-    #1
-    //addi x8,x8,2
-    instr = 32'b00000000000001000000010000010011;
-    
-   #(DURATION) $display("End of simulation");
+  #(DURATION) $display("End of simulation");
   $finish;
 end
 

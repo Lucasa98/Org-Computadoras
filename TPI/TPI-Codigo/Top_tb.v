@@ -29,26 +29,7 @@ initial begin
   $dumpfile(`DUMPSTR(`VCD_OUTPUT));
   $dumpvars(0, Top_tb);
     
-    // Queremos implementar la instruccion
-    // addi x8,x0,3
-    // addi x8,x8,3
-
-    #0
-    // addi x8,x0,3
-    //imm[31:20] = 3
-    //rs1[19:15] = 00000
-    //funct3[14:12] = 0
-    //rd[11:7] = 01000
-    //opcode[6:0] = 0010011
-
-    #2
-    //addi x8,x8,3
-
-    #2
-    //addi x8,x8,2
-
-     #2
-    //addi x8,x8,2
+    //Se ejecuta el programa cargado en IM
 
    #(DURATION) $display("End of simulation");
   $finish;

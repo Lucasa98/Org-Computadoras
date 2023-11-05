@@ -1,7 +1,9 @@
 module IM(
     //input wire clk,
     input [15:0] pc,
-    output [31:0] instr
+    output [31:0] instr,
+    output [31:0] DEBUGinstr16,
+    output [31:0] DEBUGinstr20
 );
 //hay que hardcodear todas las innstrucciones xddddddd
 
@@ -39,29 +41,10 @@ initial begin
    ROM[25] = 32'h00100f13
    ROM[26] = 32'h00128293
    ROM[27] = 32'hfb9ff06f
-    /* // LAS INSTRUCCIONES:
-    // addi x8,x0,3
-    //imm[31:20] = 3
-    //rs1[19:15] = 00000
-    //funct3[14:12] = 0
-    //rd[11:7] = 01000
-    //opcode[6:0] = 0010011
-    ROM[0] = 32'b00000000001100000000010000010011;
-    //addi x0,x0,0  (nop)
-    ROM[4] = 32'b00000000000000000000000000010011;
-    //addi x8,x8,3
-    ROM[8] = 32'b00000000001101000000010000010011;
-    //addi x0,x0,0  (nop)
-    ROM[12] = 32'b00000000000000000000000000010011;
-    //addi x8,x8,2
-    ROM[16] = 32'b00000000001001000000010000010011;
-    //addi x0,x0,0  (nop)
-    ROM[20] = 32'b00000000000000000000000000010011;
-    //addi x8,x8,2
-    ROM[24] = 32'b00000000000001000000010000010011;
-    //...*/
 end
 
 assign instr = ROM[pc];
+assign DEBUGinstr16 = ROM[16];
+assign DEBUGinstr20 = ROM[20];
 
 endmodule
