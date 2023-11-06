@@ -14,11 +14,6 @@ module mem(
     output [31:0] readData
 );
 
-// ---------- Cableciños ----------
-wire[31:0] DEBUGinstr16;
-wire[31:0] DEBUGinstr20;
-// ---------- ---------- ----------
-
 IM instrMem(
     .pc(pc),
     .instr(instr),
