@@ -30,7 +30,7 @@ mem Memory(
     .clk(clk),
     .pc(s_pc),
     .WE(s_WE),
-    .address(s_address),
+    .address_virtual(s_address),
     .writeData(s_writeData),
 
     //Salidas
