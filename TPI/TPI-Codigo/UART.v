@@ -1,3 +1,8 @@
+`include "UARTComps/Receiver.v"
+`include "UARTComps/Transmitter.v"
+`include "UARTComps/FIFO.v"
+`include "UARTComps/RateGenerator.v"
+
 module UART(
     input wire clk,
     input wire rx,
