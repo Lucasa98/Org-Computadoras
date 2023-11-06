@@ -1,7 +1,7 @@
 module MMU(
     input wire [15:0] address_virtual,
     output reg [1:0] block_select,
-    output reg [15:0] address_phisical,
+    output reg [15:0] address_physical,
     output reg DataEnable,
     output reg StackEnable,
     output reg MMIOEnable
@@ -22,17 +22,17 @@ always @(*) begin
  if (address_virtual >= DATA_ADDRESS && address_virtual < DATA_ADDRESS + BLOCK_SIZE) begin
     // Acceso al bloque .data
     block_select = 2'b00;
-    address_phisical = address_virtual - DATA_ADDRESS;
+    address_physical = address_virtual - DATA_ADDRESS;
     DataEnable = 1;
  end else if (address_virtual <= STACK_ADDRESS && address_virtual > STACK_ADDRESS - BLOCK_SIZE) begin
     // Acceso al bloque .stack
     block_select = 2'b01;
-    address_phisical = STACK_ADDRESS - address_virtual;
+    address_physical = STACK_ADDRESS - address_virtual;
     StackEnable = 1;
  end else if (address_virtual >= MMIO_ADDRESS && address_virtual < MMIO_ADDRESS + BLOCK_SIZE) begin
     // Acceso al bloque .MMIO
     block_select = 2'b10;
-    address_phisical = address_virtual - MMIO_ADDRESS;
+    address_physical = address_virtual - MMIO_ADDRESS;
     MMIOEnable = 1;
  end
 end
