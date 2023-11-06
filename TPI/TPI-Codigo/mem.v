@@ -16,9 +16,7 @@ module mem(
 
 IM instrMem(
     .pc(pc),
-    .instr(instr),
-    .DEBUGinstr16(DEBUGinstr16),
-    .DEBUGinstr20(DEBUGinstr20)
+    .instr(instr)
 );
 
 DM dataMem(

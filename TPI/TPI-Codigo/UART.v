@@ -1,66 +1,61 @@
-`include "UARTComps/Receiver.v"
-`include "UARTComps/Transmitter.v"
-`include "UARTComps/FIFO.v"
-`include "UARTComps/RateGenerator.v"
+`include "UARTComp/Receiver.v"
+`include "UARTComp/Transmitter.v"
+`include "UARTComp/FIFO.v"
+`include "UARTComp/RateGenerator.v"
 
 module UART(
     input wire clk,
-    input wire rx,
+    input wire Rx,
     input wire rd_uart,
-    input wire w_data,
+    input [7:0] w_data,
     input wire wr_uart,
-    output wire r_data,
-    output wire rx_empty,
-    output wire tx_full,
-    output wire tx
+    output [7:0] r_data,
+    output wire Rx_empty,
+    output wire Tx_full,
+    output wire Tx
 );
 
 //----------cableciños----------
 wire s_tick;
-wire s_dout;
-wire s_rx_done_tick;
-wire s_din;
-wire s_tx_done_tick;
-wire s_tx_start;
+wire[7:0] s_dout;
+wire s_Rx_done_tick;
+wire[7:0] s_din;
+wire s_Tx_done_tick;
+wire s_Tx_empty;
+wire s_Tx_start;
 //------------------------------
 
-RateGenerator generator(
-    .clk(clk),
-    .tick(tick)
-);
 
 Receiver receiver(
     .clk(clk),
-    .rx(rx),
-    .s_tick(s_tick),
+    .Rx(Rx),
     .dout(s_dout),
-    .rx_done_tick(s_rx_done_tick)
+    .Rx_done_tick(s_Rx_done_tick)
 );
 
 Transmitter transmitter(
-    .tx(tx),
-    .s_tick(s_tick),
+    .Tx(Tx),
     .din(s_din),
-    .tx_done_tick(s_tx_done_tick),
-    .tx_start(not s_tx_start)
+    .Tx_done_tick(s_Tx_done_tick),
+    .Tx_start(s_Tx_start)
 );
 
 FIFO fifoR(
     .w_data(s_dout),
-    .wr(s_rx_done_tick),
-    .full(no se),
+    .wr(s_Rx_done_tick),
     .r_data(r_data),
     .rd(rd_uart),
-    .rx_empty(rx_empty)
+    .empty(Rx_empty)
 );
 
 FIFO fifoT(
     .r_data(s_din),
-    .rd(s_tx_done_tick),
-    .rx_empty(s_tx_start),
+    .rd(s_Tx_done_tick),
+    .empty(s_Tx_empty),
     .w_data(w_data),
-    .wr(wr_uart),
-    .full(tx_full)
+    .wr(wr_uart)
 );
+
+assign s_Tx_start = ~s_Tx_empty;
 
 endmodule
