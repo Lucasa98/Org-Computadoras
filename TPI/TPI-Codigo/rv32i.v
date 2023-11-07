@@ -17,7 +17,7 @@ wire[2:0] s_f3;
 wire s_f7;
 wire s_zero;
 wire s_branch;
-wire s_jump;
+wire s_jump=0;
 wire[1:0] s_resSrc;
 wire[2:0] s_ALUControl;
 wire s_ALUSrc;

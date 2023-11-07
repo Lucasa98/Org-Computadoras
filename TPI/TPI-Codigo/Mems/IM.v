@@ -1,9 +1,7 @@
 module IM(
     //input wire clk,
     input [15:0] pc,
-    output [31:0] instr,
-    output [31:0] DEBUGinstr16,
-    output [31:0] DEBUGinstr20
+    output [31:0] instr
 );
 //hay que hardcodear todas las innstrucciones xddddddd
 
@@ -44,7 +42,5 @@ initial begin
 end
 
 assign instr = ROM[pc];
-assign DEBUGinstr16 = ROM[16];
-assign DEBUGinstr20 = ROM[20];
 
 endmodule

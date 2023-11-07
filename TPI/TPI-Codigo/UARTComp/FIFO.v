@@ -6,15 +6,18 @@ module FIFO(
     output [7:0] r_data
 );
 
-reg [7:0] data;
+reg[7:0] aux = 0;
+reg[7:0] data = 0;
 
 always @(posedge wr)
 begin
     data <= w_data;
 end
+
 always @(posedge rd)
 begin
-    data = 0;
+    aux <= data;
 end
 
+assign r_data = aux;
 endmodule

@@ -1,18 +1,18 @@
 module Transmitter
 (
     input       clk,            //i_Clock
-    input       Tx_start,       //i_Tx_DV
+    input       tx_start,       //i_Tx_DV
     input [7:0] din,            //i_Tx_Byte
-    output      Tx_done_tick,    //bandera de transmitiendo
-    output reg  Tx,             //Salida de dato en serie
-    output      o_Tx_Done       //
+    output      o_Tx_Active,    //bandera de transmitiendo
+    output reg Tx,             //Salida de dato en serie
+    output      tx_done_tick      //
 );
 
 parameter CLKS_PER_BIT = 39;
 
 //ESTADOS
 parameter s_IDLE         = 3'b000;
-parameter s_Tx_start_BIT = 3'b001;
+parameter s_TX_START_BIT = 3'b001;
 parameter s_TX_DATA_BITS = 3'b010;
 parameter s_TX_STOP_BIT  = 3'b011;
 
@@ -34,17 +34,17 @@ begin
         r_Clock_Count <= 0;     //No cuenta ticks
         r_Bit_Index   <= 0;     //No avanza el bit de data
             
-        if (Tx_start == 1'b1)    //Si Tx_start esta en alto
+        if (tx_start == 1'b1)    //Si tx_start esta en alto
             begin
                 r_Tx_Active <= 1'b1;            //Bandera de transmitiendo
                 r_Tx_Data   <= din;             //Lee el dato de la FIFO
-                r_SM_Main   <= s_Tx_start_BIT;  //Pasa al estado START
+                r_SM_Main   <= s_TX_START_BIT;  //Pasa al estado START
             end
         else
             r_SM_Main <= s_IDLE;    //Bucle de estado
     end
         
-    s_Tx_start_BIT :
+    s_TX_START_BIT :
     begin
         Tx <= 1'b0;    //Envia el Start-bit
             
@@ -52,7 +52,7 @@ begin
         if (r_Clock_Count < CLKS_PER_BIT-1)
             begin
                 r_Clock_Count <= r_Clock_Count + 1;
-                r_SM_Main     <= s_Tx_start_BIT;
+                r_SM_Main     <= s_TX_START_BIT;
             end
         else    //Cuando termina el start bit
             begin
@@ -115,7 +115,7 @@ begin
     endcase
 end
 
-assign Tx_done_tick = r_Tx_Active;
-assign o_Tx_Done   = r_Tx_Done;
+assign o_Tx_Active = r_Tx_Active;
+assign tx_done_tick   = r_Tx_Done;
    
 endmodule
