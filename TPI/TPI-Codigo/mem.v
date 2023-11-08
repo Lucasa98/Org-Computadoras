@@ -1,3 +1,6 @@
+`include "Mems/DM.v"
+`include "Mems/IM.v"
+`include "Mems/MMU.v"
 module mem(
     // Entradas
     input wire clk,
