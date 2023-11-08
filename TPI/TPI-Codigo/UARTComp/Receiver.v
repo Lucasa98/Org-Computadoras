@@ -6,7 +6,7 @@ module Receiver
     output [7:0] dout           //o_Rx_Byte
 );
 
-parameter CLKS_PER_BIT = 39;
+parameter CLKS_PER_BIT = 40;
 
 //estados
 parameter s_IDLE         = 3'b000;

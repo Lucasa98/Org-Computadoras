@@ -14,9 +14,9 @@ always #0.1 clk = ~clk;
 
 // Top ports
 reg Rx=1;
-reg rd_uart;
+reg rd;
 reg[7:0] w_data;
-reg wr_uart;
+reg wr;
 wire[7:0] r_data;
 wire rx_empty;
 wire Tx;
@@ -25,9 +25,9 @@ wire Tx;
 UART UUT (
     .clk(clk),
     .Rx(Rx),
-    .rd_uart(rd_uart),
+    .rd(rd),
     .w_data(w_data),
-    .wr_uart(wr_uart),
+    .wr(wr),
     .r_data(r_data),
     .rx_empty(rx_empty),
     .Tx(Tx)
@@ -62,6 +62,14 @@ initial begin
     //Stop-bit
     #8
     Rx = 1;
+
+    //Transmitiremos 11010010
+    #10
+    w_data = 8'b11010010;
+    #8
+    wr = 1'b1;
+    #1
+    wr = 1'b0;
 
     #(DURATION) $display("End of simulation");
     $finish;

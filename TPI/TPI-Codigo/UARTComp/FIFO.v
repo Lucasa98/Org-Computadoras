@@ -1,23 +1,49 @@
 module FIFO(
-    input [7:0] w_data,
-    input wire wr,
-    input wire rd,
-    output wire empty,
-    output [7:0] r_data
+    input wire wr,            //señal de escritura
+    input wire rd,            //señal de lectura
+    input [7:0] w_data,       //dato de escritura
+    output reg [7:0] r_data,  //dato de lectura
+    output wire full,         //bandera de llena
+    output wire empty         //bandera de vacia
 );
 
-reg[7:0] aux = 0;
-reg[7:0] data = 0;
+//punteros de escritura y lectura
+//--un bit adicional para detectar full/empty--
+reg [2:0] w_ptr, r_ptr;
+reg [7:0] fifo[4];
+wire wrap_around;
 
-always @(posedge wr)
+// Valores por defecto
+initial
 begin
-    data <= w_data;
+    w_ptr <= 0; r_ptr <= 0;
+    r_data <= 0;
 end
 
-always @(posedge rd)
+// Escritura
+always@(posedge wr)
 begin
-    aux <= data;
+    if(wr & !full)begin
+        fifo[w_ptr[1:0]] <= w_data;
+        w_ptr <= w_ptr + 1;
+    end
 end
 
-assign r_data = aux;
+// Lectura
+always@(posedge rd)
+begin
+    if(rd & !empty) begin
+        r_ptr <= r_ptr + 1;
+    end
+end
+
+always@(*)
+begin
+    r_data <= fifo[r_ptr[1:0]];
+end
+
+//Chequeo para full y empty
+assign wrap_around = w_ptr[2] ^ r_ptr[2];
+assign full = wrap_around & (w_ptr[1:0] == r_ptr[1:0]);
+assign empty = (w_ptr == r_ptr);
 endmodule

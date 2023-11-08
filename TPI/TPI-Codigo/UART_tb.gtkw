@@ -1,0 +1,29 @@
+[*]
+[*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
+[*] Wed Nov 08 02:36:35 2023
+[*]
+[dumpfile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\UART_tb.vcd"
+[dumpfile_mtime] "Wed Nov 08 02:09:24 2023"
+[dumpfile_size] 1514293
+[savefile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\UART_tb.gtkw"
+[timestart] 590000
+[size] 1000 600
+[pos] -1 -1
+*-18.872887 1721000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] UART_tb.
+[treeopen] UART_tb.UUT.
+[sst_width] 197
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 153
+@28
+UART_tb.clk
+UART_tb.Rx
+UART_tb.Tx
+UART_tb.UUT.transmitter.r_SM_Main[2:0]
+@29
+UART_tb.UUT.transmitter.din[7:0]
+@24
+UART_tb.UUT.transmitter.r_Clock_Count[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -4,11 +4,11 @@ module Transmitter
     input       tx_start,       //i_Tx_DV
     input [7:0] din,            //i_Tx_Byte
     output      o_Tx_Active,    //bandera de transmitiendo
-    output reg Tx,             //Salida de dato en serie
+    output reg  Tx,             //Salida de dato en serie
     output      tx_done_tick      //
 );
 
-parameter CLKS_PER_BIT = 39;
+parameter CLKS_PER_BIT = 40;
 
 //ESTADOS
 parameter s_IDLE         = 3'b000;

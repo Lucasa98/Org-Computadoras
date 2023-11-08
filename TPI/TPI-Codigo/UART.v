@@ -5,16 +5,15 @@
 module UART(
     input wire clk,
     input wire Rx,
-    input wire rd_uart,
+    input wire rd,
     input [7:0] w_data,
-    input wire wr_uart,
+    input wire wr,
     output [7:0] r_data,
     output wire rx_empty,
     output wire Tx
 );
 
 //----------cableciños----------
-wire s_tick;
 wire[7:0] s_dout;
 wire s_rx_done_tick;
 wire[7:0] s_din;
@@ -33,6 +32,7 @@ Receiver receiver(
 );
 
 Transmitter transmitter(
+    .clk(clk),
     .Tx(Tx),
     .din(s_din),
     .tx_done_tick(s_tx_done_tick),
@@ -40,19 +40,20 @@ Transmitter transmitter(
 );
 
 FIFO fifoR(
-    .w_data(s_dout),
     .wr(s_rx_done_tick),
+    .rd(rd),
+    .w_data(s_dout),
     .r_data(r_data),
-    .rd(rd_uart),
-    .empty(rx_empty)
+    .full(full),
+    .empty(empty)
 );
 
 FIFO fifoT(
-    .r_data(s_din),
+    .wr(wr),
     .rd(s_tx_done_tick),
-    .empty(s_tx_empty),
     .w_data(w_data),
-    .wr(wr_uart)
+    .r_data(s_din),
+    .empty(s_tx_empty)
 );
 
 always @(*)
