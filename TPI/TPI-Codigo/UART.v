@@ -8,9 +8,8 @@ module UART(
     input wire clk,
     input wire Rx,
     input [2:0] address,
-    input wire rd,
     input [7:0] w_data,
-    input wire wr,
+    input wire we,
     output [7:0] r_data,
     output wire rx_empty,
     output wire Tx,
@@ -23,6 +22,12 @@ wire s_rx_done_tick;
 wire[7:0] s_din;
 wire s_tx_done_tick;
 wire s_tx_start;
+
+wire[7:0] DEBUGbank0;
+wire[7:0] DEBUGbank1;
+wire[7:0] DEBUGbank2;
+wire[7:0] DEBUGbank3;
+wire[7:0] DEBUGbank4;
 //------------------------------
 
 Receiver receiver(
@@ -46,12 +51,17 @@ RBuffer rbuffer(
     .w_data(s_dout),
     .address(address),
     .r_data(r_data),
-    .full(full)
+    .full(full),
+    .DEBUGbank0(DEBUGbank0),
+    .DEBUGbank1(DEBUGbank1),
+    .DEBUGbank2(DEBUGbank2),
+    .DEBUGbank3(DEBUGbank3),
+    .DEBUGbank4(DEBUGbank4)
 );
 
 TBuffer tbuffer(
     .clk(clk),
-    .wr(wr),
+    .wr(we),
     .rd(s_tx_done_tick),
     .w_data(w_data),
     .address(address),

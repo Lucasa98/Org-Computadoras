@@ -1,29 +1,32 @@
 [*]
 [*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
-[*] Wed Nov 08 02:36:35 2023
+[*] Thu Nov 09 19:05:18 2023
 [*]
-[dumpfile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\UART_tb.vcd"
-[dumpfile_mtime] "Wed Nov 08 02:09:24 2023"
-[dumpfile_size] 1514293
-[savefile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\UART_tb.gtkw"
-[timestart] 590000
+[dumpfile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6\Organizacion de las Computadoras\Org-Computadoras-2023\TPI\TPI-Codigo\Top_tb.vcd"
+[dumpfile_mtime] "Thu Nov 09 18:45:38 2023"
+[dumpfile_size] 339511
+[savefile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6\Organizacion de las Computadoras\Org-Computadoras-2023\TPI\TPI-Codigo\UART_tb.gtkw"
+[timestart] 44000
 [size] 1000 600
-[pos] -1 -1
-*-18.872887 1721000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 321 2
+*-14.325128 313000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] UART_tb.
 [treeopen] UART_tb.UUT.
 [sst_width] 197
-[signals_width] 174
+[signals_width] 142
 [sst_expanded] 1
 [sst_vpaned_height] 153
 @28
 UART_tb.clk
+[color] 2
 UART_tb.Rx
-UART_tb.Tx
-UART_tb.UUT.transmitter.r_SM_Main[2:0]
+UART_tb.UUT.receiver.dout[7:0]
+UART_tb.UUT.receiver.r_Rx_done_tick
+UART_tb.UUT.receiver.r_SM_Main[2:0]
 @29
-UART_tb.UUT.transmitter.din[7:0]
-@24
-UART_tb.UUT.transmitter.r_Clock_Count[7:0]
+UART_tb.UUT.rbuffer.w_data[7:0]
+@28
+[color] 2
+UART_tb.Tx
 [pattern_trace] 1
 [pattern_trace] 0
