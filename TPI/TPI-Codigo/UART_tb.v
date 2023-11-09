@@ -45,7 +45,7 @@ initial begin
     //start-bit
     Rx = 0;
     //Data
-    #8.5
+    #8
     Rx = 0;
     #8
     Rx = 0;
@@ -66,7 +66,7 @@ initial begin
     Rx = 1;
 
     //Enviaremos 8'b00000111 = 7
-    #2
+    #8
     //start-bit
     Rx = 0;
     //Data
@@ -91,7 +91,7 @@ initial begin
     Rx = 1;
 
     //Enviaremos 8'b00101010 = *
-    #2
+    #8
     //start-bit
     Rx = 0;
     //Data
@@ -116,7 +116,7 @@ initial begin
     Rx = 1;
 
     //Enviaremos 8'b00001001 = 9
-    #2
+    #8
     //start-bit
     Rx = 0;
     //Data
@@ -141,7 +141,7 @@ initial begin
     Rx = 1;
 
     //Enviaremos 8'b00000011 = 3
-    #2
+    #8
     //start-bit
     Rx = 0;
     //Data

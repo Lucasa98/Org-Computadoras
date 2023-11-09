@@ -59,6 +59,7 @@ begin
                     begin   // empieza el muestreo y pasa al leer DATA
                         //ACA ESTARIAMOS PARADOS A LA MITAD DEL BIT DE INICIO
                         r_Clock_Count <= 0;  // reset counter, found the middle
+                        r_data_out <= 0;
                         r_SM_Main     <= s_Rx_DATA_BITS;
                     end
                 else

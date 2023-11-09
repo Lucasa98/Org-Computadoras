@@ -50,7 +50,7 @@ begin
     DEBUGbank1 <= buffer[1];
     DEBUGbank2 <= buffer[2];
     DEBUGbank3 <= buffer[3];
-    DEBUGbank3 <= buffer[4];
+    DEBUGbank4 <= buffer[4];
 end
 
 assign full = aux_full;
