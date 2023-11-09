@@ -41,23 +41,14 @@ DM dataMem(
     .rd(readData)
 );
 
-// Stack Memory
-DM stackMem(
-    .clk(clk),
-    .address(address_physical),
-    .wd(writeData),
-    .we(StackEnable),
-    .rd(readData)
-);
-
 // MMIO Memory
-DM MMIO(
+/* DM MMIO(
     .clk(clk),
     .address(address_physical),
     .wd(writeData),
     .we(MMIOEnable), 
     .rd(readData)
-);
+); */
 
 // Instruction Memory (IM)
 IM instrMem(

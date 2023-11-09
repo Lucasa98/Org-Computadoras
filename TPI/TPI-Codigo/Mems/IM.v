@@ -11,7 +11,7 @@ parameter ROM_ADDR_BITS = 5;
 reg [ROM_WIDTH-1:0] ROM [(2**ROM_ADDR_BITS)-1:0];
 
 initial begin
-   ROM[0] = 32'h00000293;
+   /* ROM[0] = 32'h00000293;
    ROM[1] = 32'h00000393;
    ROM[2] = 32'h00100313;
    ROM[3] = 32'h100105b7;
@@ -38,7 +38,10 @@ initial begin
    ROM[24] = 32'h00900fb3;
    ROM[25] = 32'h00100f13;
    ROM[26] = 32'h00128293;
-   ROM[27] = 32'hfb9ff06f;
+   ROM[27] = 32'hfb9ff06f; */
+   ROM[0] = 32'h00c00513;
+   ROM[4] = 32'h00900593;
+   ROM[8] = 32'h40b50633;
 end
 
 assign instr = ROM[pc];

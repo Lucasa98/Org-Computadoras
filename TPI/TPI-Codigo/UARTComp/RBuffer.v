@@ -1,9 +1,10 @@
 module RBuffer(
+    input clk,
     input wire wr,            //señal de escritura
     input [7:0] w_data,       //dato de escritura
     input [2:0] address,      //Dirección de lectura
     output reg [7:0] r_data,  //dato de lectura
-    output wire full,         //bandera de llena
+    output wire full         //bandera de llena
 );
 
 //punteros de escritura y lectura
@@ -20,16 +21,16 @@ begin
 end
 
 // Escritura
-always@(posedge wr)
+always@(posedge clk)
 begin
-    if(wr & !full)
+    if(wr)
     begin
-        full <= 0;
+        aux_full <= 0;
         buffer[w_ptr] <= w_data;
         w_ptr <= w_ptr + 1;
-        if(w_ptr > 3)
+        if(w_ptr > 4)
         begin
-            full = 1;
+            aux_full <= 1;
             w_ptr <= 0;
         end
     end

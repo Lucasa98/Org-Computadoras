@@ -20,9 +20,9 @@ begin
                 3'b000:
                     if(f7 && op)
                     begin
-                        aluControlAux = 3'b000; //add
+                        aluControlAux = 3'b001; //substract
                     end else begin
-                        aluControlAux = 3'b001;  //substract
+                        aluControlAux = 3'b000;  //add
                     end
                 3'b010:
                     aluControlAux = 3'b101;     //set less than

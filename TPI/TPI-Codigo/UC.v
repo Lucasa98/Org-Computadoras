@@ -16,7 +16,11 @@ module UC(
     output wire regWrite
 );
 
-wire[1:0] ALUop = 0;
+wire[1:0] ALUop;
+/* initial
+begin
+    ALUop <= 0;
+end */
 
 mainDeco MainDecoder(
     .op(op),

@@ -1,16 +1,20 @@
-`include "UARTComp/FIFO.v"
+`include "UARTComp/RBuffer.v"
+`include "UARTComp/TBuffer.v"
 `include "UARTComp/Receiver.v"
 `include "UARTComp/Transmitter.v"
+`include "UARTComp/Converter.v"
 
 module UART(
     input wire clk,
     input wire Rx,
+    input [2:0] address,
     input wire rd,
     input [7:0] w_data,
     input wire wr,
     output [7:0] r_data,
     output wire rx_empty,
-    output wire Tx
+    output wire Tx,
+    output wire full
 );
 
 //----------cableciños----------
@@ -18,11 +22,8 @@ wire[7:0] s_dout;
 wire s_rx_done_tick;
 wire[7:0] s_din;
 wire s_tx_done_tick;
-wire s_tx_empty;
 wire s_tx_start;
 //------------------------------
-
-reg r_tx_start;
 
 Receiver receiver(
     .clk(clk),
@@ -39,26 +40,23 @@ Transmitter transmitter(
     .tx_start(s_tx_start)
 );
 
-FIFO fifoR(
+RBuffer rbuffer(
+    .clk(clk),
     .wr(s_rx_done_tick),
-    .rd(rd),
     .w_data(s_dout),
+    .address(address),
     .r_data(r_data),
-    .full(full),
-    .empty(empty)
+    .full(full)
 );
 
-FIFO fifoT(
+TBuffer tbuffer(
+    .clk(clk),
     .wr(wr),
     .rd(s_tx_done_tick),
     .w_data(w_data),
+    .address(address),
     .r_data(s_din),
-    .empty(s_tx_empty)
+    .full(s_tx_start)
 );
-
-always @(*)
-    r_tx_start <= ~s_tx_empty;
-
-assign s_tx_start = r_tx_start;
 
 endmodule
