@@ -8,9 +8,9 @@ module MMU(
     output reg UARTEnable
 );
 // Definición de direcciones virtuales
-parameter DATA_ADDRESS = 16'h2000;
-parameter STACK_ADDRESS = 16'h3ffc;
-parameter UART_ADDRESS = 16'h7f00;
+parameter DATA_ADDRESS = 16'h0000;
+parameter STACK_ADDRESS = 16'h0400;
+parameter UART_ADDRESS = 16'h0800;
 // Definición de tamaño de bloque (32 registros de 32 bits)
 parameter BLOCK_SIZE = 32;
 // Mapeo de direcciones virtuales a bloques de datos

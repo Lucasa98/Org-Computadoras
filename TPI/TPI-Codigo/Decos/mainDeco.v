@@ -25,6 +25,7 @@ begin
         3:      //lw
         begin
             branchAux = 0;
+            jumpAux = 0;
             resSrcAux = 2'b01;
             memWriteAux = 0;
             aluSrcAux = 1;
@@ -35,6 +36,7 @@ begin
         35:     //sw
         begin
             branchAux = 0;
+            jumpAux = 0;
             memWriteAux = 1;
             aluSrcAux = 1;
             immSrcAux = 2'b01;
@@ -44,6 +46,7 @@ begin
         51:     //R-Type
         begin
             branchAux = 0;
+            jumpAux = 0;
             resSrcAux = 2'b00;
             memWriteAux = 0;
             aluSrcAux = 0;
@@ -53,6 +56,7 @@ begin
         99:     //beq
         begin
             branchAux = 1;
+            jumpAux = 0;
             memWriteAux = 0;
             aluSrcAux = 0;
             immSrcAux = 2'b10;
@@ -62,6 +66,7 @@ begin
         19:     //I-Type
         begin
             branchAux = 0;
+            jumpAux = 0;
             resSrcAux = 2'b00;
             memWriteAux = 0;
             aluSrcAux = 1;

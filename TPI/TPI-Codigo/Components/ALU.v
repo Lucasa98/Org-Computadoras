@@ -7,6 +7,7 @@ module ALU(
 );
 
 reg [31:0] aux = 0;
+reg aux_zero = 0;
 
 always @(*)
 begin
@@ -22,9 +23,10 @@ begin
         default:
             aux = srcA;
     endcase
+    aux_zero <= srcA == srcB;
 end
 
-assign zero = 0;
+assign zero = aux_zero;
 assign res = aux;
 
 endmodule
