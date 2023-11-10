@@ -11,7 +11,14 @@ module UART(
     input [31:0] w_data,
     input wire we,
     output [31:0] r_data,
-    output wire o_Tx
+    output wire o_Tx,
+
+    output [7:0] DEBUGBuffer0,
+    output [7:0] DEBUGBuffer1,
+    output [7:0] DEBUGBuffer2,
+    output [7:0] DEBUGBuffer3,
+    output [7:0] DEBUGBuffer4,
+    output [7:0] DEBUGBuffer5
 );
 
 //----------cableciños----------
@@ -53,7 +60,14 @@ RBuffer rbuffer(
     .wr(s_rx_done_tick),
     .w_data(s_dout),
     .address(address[2:0]),
-    .r_data(readAux)
+    .r_data(readAux),
+
+    .DEBUGBuffer0(DEBUGBuffer0),
+    .DEBUGBuffer1(DEBUGBuffer1),
+    .DEBUGBuffer2(DEBUGBuffer2),
+    .DEBUGBuffer3(DEBUGBuffer3),
+    .DEBUGBuffer4(DEBUGBuffer4),
+    .DEBUGBuffer5(DEBUGBuffer5)
 );
 
 TBuffer tbuffer(

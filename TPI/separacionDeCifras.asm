@@ -1,5 +1,5 @@
 .text
-	lui x11, 0x10010
+	lui x11, x0, 32512
 idle:	lw x16, 20(x11)		#vemos si esta cargado xx*yy
 	beq x16, x0, idle
 	#Multiplicacion de xx*yy

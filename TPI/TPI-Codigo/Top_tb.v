@@ -32,7 +32,7 @@ initial begin
     $dumpfile(`DUMPSTR(`VCD_OUTPUT));
     $dumpvars(0, Top_tb);
 
-    //Enviaremos 8'b00001000 = 8
+    //Enviaremos 8'b00111000 = 56
     #2
     //start-bit
     Rx = 0;
@@ -46,9 +46,9 @@ initial begin
     #8
     Rx = 1;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
     Rx = 0;
     #8
@@ -57,7 +57,7 @@ initial begin
     #8
     Rx = 1;
 
-    //Enviaremos 8'b00000111 = 7
+    //Enviaremos 8'b00110111 = 7
     #8
     //start-bit
     Rx = 0;
@@ -71,9 +71,9 @@ initial begin
     #8
     Rx = 0;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
     Rx = 0;
     #8
@@ -107,7 +107,7 @@ initial begin
     #8
     Rx = 1;
 
-    //Enviaremos 8'b00001001 = 9
+    //Enviaremos 8'b00111001 = 9
     #8
     //start-bit
     Rx = 0;
@@ -121,9 +121,9 @@ initial begin
     #8
     Rx = 1;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
     Rx = 0;
     #8
@@ -132,7 +132,7 @@ initial begin
     #8
     Rx = 1;
 
-    //Enviaremos 8'b00000011 = 3
+    //Enviaremos 8'b00110011 = 3
     #8
     //start-bit
     Rx = 0;
@@ -146,9 +146,9 @@ initial begin
     #8
     Rx = 0;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
-    Rx = 0;
+    Rx = 1;
     #8
     Rx = 0;
     #8
