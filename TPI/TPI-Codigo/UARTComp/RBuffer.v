@@ -3,13 +3,13 @@ module RBuffer(
     input wire wr,            //señal de escritura
     input [7:0] w_data,       //dato de escritura
     input [2:0] address,      //Dirección de lectura
-    output reg [7:0] r_data,  //dato de lectura
+    output reg [7:0] r_data  //dato de lectura
     //output wire full         //bandera de llena
 );
 
 //punteros de escritura y lectura
 reg [2:0] w_ptr;
-reg [7:0] buffer[6];
+reg [7:0] buffer[5:0];
 reg aux_full;
 
 // Valores por defecto

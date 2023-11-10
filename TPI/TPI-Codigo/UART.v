@@ -7,11 +7,11 @@
 module UART(
     input wire clk,
     input wire Rx,
-    input [2:0] address,
+    input [15:0] address,
     input [31:0] w_data,
     input wire we,
     output [31:0] r_data,
-    output wire Tx,
+    output wire Tx
 );
 
 //----------cableciños----------
@@ -21,11 +21,6 @@ wire[7:0] s_din;
 wire s_tx_done_tick;
 wire s_tx_start;
 
-wire[7:0] DEBUGbuffer0;
-wire[7:0] DEBUGbuffer1;
-wire[7:0] DEBUGbuffer2;
-wire[7:0] DEBUGbuffer3;
-
 wire [7:0]readAux;
 wire [7:0]writeDataAux;
 //------------------------------
@@ -33,9 +28,9 @@ wire [7:0]writeDataAux;
 // converter
 Converter Conv(
     .i_8bits(readAux),
-    .i_32bits(rData),
+    .i_32bits(w_data),
     .o_8bits(writeDataAux), 
-    .o_32bits(w_data)
+    .o_32bits(r_data)
 );
 
 Receiver receiver(
@@ -57,7 +52,7 @@ RBuffer rbuffer(
     .clk(clk),
     .wr(s_rx_done_tick),
     .w_data(s_dout),
-    .address(address),
+    .address(address[2:0]),
     .r_data(readAux)
 );
 
@@ -66,14 +61,9 @@ TBuffer tbuffer(
     .wr(we),
     .rd(s_tx_done_tick),
     .w_data(writeDataAux),
-    .address(address),
+    .address(address[2:0]),
     .r_data(s_din),
-    .full(s_tx_start),
-
-    .DEBUGbuffer0(DEBUGbuffer0),
-    .DEBUGbuffer1(DEBUGbuffer1),
-    .DEBUGbuffer2(DEBUGbuffer2),
-    .DEBUGbuffer3(DEBUGbuffer3)
+    .full(s_tx_start)
 );
 
 endmodule

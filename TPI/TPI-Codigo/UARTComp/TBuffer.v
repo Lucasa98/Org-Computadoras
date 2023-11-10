@@ -16,7 +16,7 @@ module TBuffer(
 //punteros de escritura y lectura
 reg [2:0] r_ptr;
 reg [2:0] count_w;  //contador de escrituras
-reg [7:0] buffer[4];
+reg [7:0] buffer[3:0];
 reg aux_full;
 
 // Valores por defecto

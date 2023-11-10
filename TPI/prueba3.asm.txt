@@ -1,0 +1,37 @@
+.text 
+	lui a1,0x10010 #primera direccion
+	inicio:
+	addi t0,zero,0 #iterador para ver en que operacion estoy
+	addi t2,zero,0 #iterador para ver en que numero estoy
+	addi t1,zero,1 #comparador
+	
+	loop:
+		lw t3,(a1)
+		addi t3,t3,-48 #le resto 48 al numero que entro
+		addi t4,zero,10 #numero para multiplicar(decena)
+		addi t5,zero,1 #iterador para la multiplicacion
+		add t6,zero,t3 #me guardo el valor que tengo que sumar
+		multiplicacion1: beq t5,t4,fin1
+			add t3,t3,t6
+			addi t5,t5,1
+			j multiplicacion1
+		fin1:beq t0,t1,fin2
+			addi a1,a1,4
+			lw t4,(a1)#unidad
+			addi t4,t4,-48 #le resto 48 al numero que entro
+			beq t2,t1,segundo
+				add s1,t4,t3 #guardo el primer numero
+				addi a1,a1,8 #aumento la direccion
+				addi t2,t2,1 #aumento el iterador porque empiezo con el segundo operando
+				j loop
+			segundo:
+				add s2,t4,t3 #guardo el segundo numero
+				add t3,zero,s1
+				add t6,zero,s1
+				addi t5,zero,1
+				addi t0,t0,1
+				j multiplicacion1
+	fin2: nop
+      		beq x1, x0, fin2
+      		j inicio
+				

@@ -1,8 +1,4 @@
-/*module contador (
-   input wire clk,
-   input reg[15:0] pcNext,
-   output reg[15:0] pc
-);*/
+
 module PC(
     input wire clk,
     input [15:0] pcNext,

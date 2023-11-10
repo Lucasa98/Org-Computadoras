@@ -17,13 +17,17 @@ wire[2:0] s_f3;
 wire s_f7;
 wire s_zero;
 wire s_branch;
-wire s_jump=0;
+wire s_jump;
 wire[1:0] s_resSrc;
 wire[2:0] s_ALUControl;
 wire s_ALUSrc;
 wire[1:0] s_immSrc;
 wire s_regWrite;
 // ---------- ---------- ----------
+
+reg aux_jump;
+initial
+    aux_jump <= 0;
 
 UC unitControl(
     .f7(s_f7),
@@ -59,5 +63,7 @@ dataPath DataPath(
     .f3(s_f3),
     .op(s_op)
 );
+
+assign jump = aux_jump;
 
 endmodule

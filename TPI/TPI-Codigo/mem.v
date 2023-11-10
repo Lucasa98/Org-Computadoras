@@ -1,7 +1,7 @@
 `include "Mems/DM.v"
 `include "Mems/IM.v"
 `include "Mems/MMU.v"
-`include "UARTComp/Converter.v"
+
 module mem(
     // Entradas
     input wire clk,
@@ -20,7 +20,7 @@ wire[1:0] block_select;
 wire[15:0] address_physical;
 wire DataEnable;
 wire StackEnable; 
-wire UARTWEnable;
+wire UARTEnable;
 // ---------- ---------- ----------
 // ----------- Banderas -----------
 wire Rfull;
@@ -33,7 +33,7 @@ MMU memory_mapping(
     .address_physical(address_physical),
     .DataEnable(DataEnable),
     .StackEnable(StackEnable),
-    .MMIOEnable(MMIOEnable)
+    .UARTEnable(UARTEnable)
 );
 
 // Data Memory
@@ -50,11 +50,9 @@ DM dataMem(
 UART UartModule(
     .clk(clk),
     .address(address_physical),
-    .w_data(writeDataAux),
-    .we(UARTWEnable),
-    .r_data(readAux),
-    .rx_empty(rxempty),
-    .full(Rfull)
+    .w_data(writeData),
+    .we(UARTEnable),
+    .r_data(readData)
 );
 
 // Instruction Memory (IM)
