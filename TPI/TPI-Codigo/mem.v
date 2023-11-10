@@ -9,10 +9,12 @@ module mem(
     input wire WE,
     input [15:0] address_virtual,
     input [31:0] writeData,
+    input wire i_Rx,
 
     // Salidas
     output [31:0] instr,
-    output [31:0] readData
+    output [31:0] readData,
+    output wire o_Tx
 );
 
 // ---------- Cableciños ----------
@@ -49,10 +51,12 @@ DM dataMem(
 // UART 
 UART UartModule(
     .clk(clk),
+    .i_Rx(i_Rx),
     .address(address_physical),
     .w_data(writeData),
     .we(UARTEnable),
-    .r_data(readData)
+    .r_data(readData),
+    .o_Tx(o_Tx)
 );
 
 // Instruction Memory (IM)

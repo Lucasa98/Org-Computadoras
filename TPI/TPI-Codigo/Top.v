@@ -1,10 +1,10 @@
 module Top(
     //Entradas
     input wire clk,
+    input wire Rx,
 
     //Salidas
-    output [31:0] sal,
-    output [15:0] addressSal
+    output wire Tx
 );
 
 // ---------- Cableciños ----------
@@ -32,10 +32,12 @@ mem Memory(
     .WE(s_WE),
     .address_virtual(s_address),
     .writeData(s_writeData),
+    .i_Rx(Rx),
 
     //Salidas
     .instr(s_instr),
-    .readData(s_readData)
+    .readData(s_readData),
+    .o_Tx(Tx)
 );
 
 assign sal = s_writeData;

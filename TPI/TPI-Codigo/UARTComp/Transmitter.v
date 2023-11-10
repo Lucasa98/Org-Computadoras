@@ -4,7 +4,7 @@ module Transmitter
     input       tx_start,       //i_Tx_DV
     input [7:0] din,            //i_Tx_Byte
     output      o_Tx_Active,    //bandera de transmitiendo
-    output reg  Tx,             //Salida de dato en serie
+    output reg  o_Tx,             //Salida de dato en serie
     output      tx_done_tick      //
 );
 
@@ -29,7 +29,7 @@ begin
     //ESTADO IDLE
     s_IDLE:
     begin
-        Tx   <= 1'b1;  //Transmitir alto en IDLE
+        o_Tx   <= 1'b1;  //Transmitir alto en IDLE
         r_Tx_Done     <= 1'b0;  //No transmitio nada
         r_Clock_Count <= 0;     //No cuenta ticks
         r_Bit_Index   <= 0;     //No avanza el bit de data
@@ -46,7 +46,7 @@ begin
         
     s_TX_START_BIT :
     begin
-        Tx <= 1'b0;    //Envia el Start-bit
+        o_Tx <= 1'b0;    //Envia el Start-bit
             
         // Espera CLKS_PER_BIT ticks para terminar el Start-bit
         if (r_Clock_Count < CLKS_PER_BIT-1)
@@ -64,7 +64,7 @@ begin
     s_TX_DATA_BITS :
     begin
         // Envia a Tx el bit r_bit_index de Data
-        Tx <= r_Tx_Data[r_Bit_Index];
+        o_Tx <= r_Tx_Data[r_Bit_Index];
         
         //Espera CLKS_PER_BIT ticks por cada bit de Data
         if (r_Clock_Count < CLKS_PER_BIT-1)
@@ -92,7 +92,7 @@ begin
     s_TX_STOP_BIT :
     begin
         //Envia el bit de Stop
-        Tx <= 1'b1;
+        o_Tx <= 1'b1;
             
         //Envia el Stop-bit CLKS_PER_BIT ticks
         if (r_Clock_Count < CLKS_PER_BIT-1)

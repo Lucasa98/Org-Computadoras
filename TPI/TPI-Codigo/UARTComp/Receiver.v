@@ -1,7 +1,7 @@
 module Receiver
 (
     input wire clk,             //i_clock
-    input wire Rx,              //i_Rx_serial
+    input wire i_Rx,            //i_Rx_serial
     output wire Rx_done_tick,   //o_Rx_DV
     output [7:0] dout           //o_Rx_Byte
 );
@@ -29,7 +29,7 @@ reg [2:0]     r_SM_Main     = 0;    //Estado actual
 // DE UNA
 always @(posedge clk)
 begin
-    r_Rx_Data_R <= Rx;
+    r_Rx_Data_R <= i_Rx;
     r_Rx_Data   <= r_Rx_Data_R;
 end
 

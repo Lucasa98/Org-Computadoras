@@ -6,12 +6,12 @@
 
 module UART(
     input wire clk,
-    input wire Rx,
+    input wire i_Rx,
     input [15:0] address,
     input [31:0] w_data,
     input wire we,
     output [31:0] r_data,
-    output wire Tx
+    output wire o_Tx
 );
 
 //----------cableciños----------
@@ -35,14 +35,14 @@ Converter Conv(
 
 Receiver receiver(
     .clk(clk),
-    .Rx(Rx),
+    .i_Rx(i_Rx),
     .Rx_done_tick(s_rx_done_tick),
     .dout(s_dout)
 );
 
 Transmitter transmitter(
     .clk(clk),
-    .Tx(Tx),
+    .o_Tx(o_Tx),
     .din(s_din),
     .tx_done_tick(s_tx_done_tick),
     .tx_start(s_tx_start)

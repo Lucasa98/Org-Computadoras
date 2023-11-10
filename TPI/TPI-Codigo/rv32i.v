@@ -64,6 +64,6 @@ dataPath DataPath(
     .op(s_op)
 );
 
-assign jump = aux_jump;
+assign s_jump = aux_jump;
 
 endmodule
