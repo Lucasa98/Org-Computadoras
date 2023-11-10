@@ -8,12 +8,10 @@ module UART(
     input wire clk,
     input wire Rx,
     input [2:0] address,
-    input [7:0] w_data,
+    input [31:0] w_data,
     input wire we,
-    output [7:0] r_data,
-    output wire rx_empty,
+    output [31:0] r_data,
     output wire Tx,
-    output wire full
 );
 
 //----------cableciños----------
@@ -27,7 +25,18 @@ wire[7:0] DEBUGbuffer0;
 wire[7:0] DEBUGbuffer1;
 wire[7:0] DEBUGbuffer2;
 wire[7:0] DEBUGbuffer3;
+
+wire [7:0]readAux;
+wire [7:0]writeDataAux;
 //------------------------------
+
+// converter
+Converter Conv(
+    .i_8bits(readAux),
+    .i_32bits(rData),
+    .o_8bits(writeDataAux), 
+    .o_32bits(w_data)
+);
 
 Receiver receiver(
     .clk(clk),
@@ -49,15 +58,14 @@ RBuffer rbuffer(
     .wr(s_rx_done_tick),
     .w_data(s_dout),
     .address(address),
-    .r_data(r_data),
-    .full(full)
+    .r_data(readAux)
 );
 
 TBuffer tbuffer(
     .clk(clk),
     .wr(we),
     .rd(s_tx_done_tick),
-    .w_data(w_data),
+    .w_data(writeDataAux),
     .address(address),
     .r_data(s_din),
     .full(s_tx_start),

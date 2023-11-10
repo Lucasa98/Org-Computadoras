@@ -47,7 +47,7 @@ always@(posedge wr)
 begin
     if(wr & ~full)
     begin
-        buffer[address] = w_data;
+        buffer[address-6] = w_data;
         count_w = count_w + 1;
         if(count_w > 3)
         begin
