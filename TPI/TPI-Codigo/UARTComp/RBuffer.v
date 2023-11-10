@@ -4,13 +4,7 @@ module RBuffer(
     input [7:0] w_data,       //dato de escritura
     input [2:0] address,      //Dirección de lectura
     output reg [7:0] r_data,  //dato de lectura
-    output wire full,         //bandera de llena
-
-    output reg[7:0] DEBUGbank0,
-    output reg[7:0] DEBUGbank1,
-    output reg[7:0] DEBUGbank2,
-    output reg[7:0] DEBUGbank3,
-    output reg[7:0] DEBUGbank4
+    output wire full         //bandera de llena
 );
 
 //punteros de escritura y lectura
@@ -46,11 +40,6 @@ end
 always@(*)
 begin
     r_data <= buffer[address];
-    DEBUGbank0 <= buffer[0];
-    DEBUGbank1 <= buffer[1];
-    DEBUGbank2 <= buffer[2];
-    DEBUGbank3 <= buffer[3];
-    DEBUGbank4 <= buffer[4];
 end
 
 assign full = aux_full;

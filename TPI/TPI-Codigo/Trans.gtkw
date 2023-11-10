@@ -1,0 +1,36 @@
+[*]
+[*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
+[*] Fri Nov 10 00:16:19 2023
+[*]
+[dumpfile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\UART_tb.vcd"
+[dumpfile_mtime] "Fri Nov 10 00:15:14 2023"
+[dumpfile_size] 14992653
+[savefile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\Trans.gtkw"
+[timestart] 400280
+[size] 1366 697
+[pos] -165 -90
+*-11.245030 403130 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] UART_tb.
+[treeopen] UART_tb.UUT.
+[sst_width] 197
+[signals_width] 189
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@28
+UART_tb.clk
+[color] 2
+UART_tb.Tx
+@24
+UART_tb.UUT.tbuffer.count_w[2:0]
+UART_tb.UUT.tbuffer.address[2:0]
+UART_tb.UUT.tbuffer.w_data[7:0]
+UART_tb.UUT.tbuffer.DEBUGbuffer0[7:0]
+UART_tb.UUT.tbuffer.DEBUGbuffer1[7:0]
+UART_tb.UUT.tbuffer.DEBUGbuffer2[7:0]
+@25
+UART_tb.UUT.tbuffer.DEBUGbuffer3[7:0]
+@28
+UART_tb.UUT.tbuffer.full
+UART_tb.UUT.tbuffer.aux_full
+[pattern_trace] 1
+[pattern_trace] 0

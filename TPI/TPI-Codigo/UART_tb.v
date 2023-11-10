@@ -170,31 +170,31 @@ initial begin
     address = 0;
     w_data = 32'd1;
     we = 1;
-    #8
+    #1
     we = 0;
 
     //Transmitiremos 00001001 = 9
-    #8
+    #1
     address = 1;
     w_data = 32'd9;
     we = 1;
-    #8
+    #1
     we = 0;
 
     //Transmitiremos 00000000 = 0
-    #8
+    #1
     address = 2;
     w_data = 32'd0;
     we = 1;
-    #8
+    #1
     we = 0;
 
     //Transmitiremos 00001000 = 8
-    #8
+    #1
     address = 3;
     w_data = 32'd8;
     we = 1;
-    #8
+    #1
     we = 0;
 
     #(DURATION) $display("End of simulation");

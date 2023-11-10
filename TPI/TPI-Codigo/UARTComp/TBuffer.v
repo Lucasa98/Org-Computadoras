@@ -5,7 +5,12 @@ module TBuffer(
     input [7:0] w_data,       //dato de escritura
     input [2:0] address,      //Dirección de escritura
     output reg [7:0] r_data,  //dato de lectura
-    output wire full          //bandera de llena
+    output wire full,         //bandera de llena
+
+    output reg[7:0] DEBUGbuffer0,
+    output reg[7:0] DEBUGbuffer1,
+    output reg[7:0] DEBUGbuffer2,
+    output reg[7:0] DEBUGbuffer3
 );
 
 //punteros de escritura y lectura
@@ -24,25 +29,29 @@ begin
 end
 
 // Escritura
-always@(posedge clk)
+always@(posedge rd)
 begin
-    if(rd)      //si el transmitter leyo un dato, avanzamos el puntero de lectura
+    if(rd & full)      //si el transmitter leyo un dato, avanzamos el puntero de lectura
     begin
-        r_ptr <= r_ptr + 1;
+        r_ptr = r_ptr + 1;
         if(r_ptr > 3)   //si el transmitter leyo todos los datos, reiniciamos
         begin
-            r_ptr <= 0;
-            aux_full <= 0;
-            count_w <= 0;
+            r_ptr = 0;
+            aux_full = 0;
+            count_w = 0;
         end
     end
-    if(wr == 1 & !full)
+end
+
+always@(posedge wr)
+begin
+    if(wr & ~full)
     begin
-        buffer[address] <= w_data;
-        count_w <= count_w + 1;
+        buffer[address] = w_data;
+        count_w = count_w + 1;
         if(count_w > 3)
         begin
-            aux_full <= 1;
+            aux_full = 1;
         end
     end
 end
@@ -51,6 +60,10 @@ end
 always@(*)
 begin
     r_data <= buffer[r_ptr];
+    DEBUGbuffer0 <= buffer[0];
+    DEBUGbuffer1 <= buffer[1];
+    DEBUGbuffer2 <= buffer[2];
+    DEBUGbuffer3 <= buffer[3];
 end
 
 assign full = aux_full;
