@@ -21,12 +21,9 @@ wire[15:0] address_physical;
 wire DataEnable;
 wire StackEnable; 
 wire UARTWEnable;
-wire [7:0]readAux;
-wire [7:0]writeDataAux;
 // ---------- ---------- ----------
 // ----------- Banderas -----------
 wire Rfull;
-wire rxempty;
 // ----------- -------- -----------
 
 // Memory Mapping (MMU)
@@ -48,13 +45,7 @@ DM dataMem(
     .rd(readData)
 );
 
-// converter
-Converter Conv(
-    .i_8bits(readAux),
-    .i_32bits(writeData),
-    .o_8bits(writeDataAux), 
-    .o_32bits(readData)
-);
+
 // UART 
 UART UartModule(
     .clk(clk),
