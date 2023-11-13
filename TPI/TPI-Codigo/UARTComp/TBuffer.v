@@ -43,7 +43,7 @@ begin
     end
 end
 
-always@(posedge wr)
+always@(posedge clk)
 begin
     if(wr && ~full)
     begin
