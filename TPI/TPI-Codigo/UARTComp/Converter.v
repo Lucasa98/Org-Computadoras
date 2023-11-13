@@ -13,8 +13,8 @@ end
 
 always@(*)
 begin
-    o_8bits <= i_32bits;
-    o_32bits <= i_8bits;
+    o_8bits = i_32bits;
+    o_32bits = i_8bits;
 end
 
 endmodule

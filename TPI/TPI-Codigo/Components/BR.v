@@ -27,7 +27,7 @@ always @(posedge clk)
 begin
     if(we)
     begin
-        regBank[a3] <= wd3;
+        regBank[a3] = wd3;
         //que escriba
     end
     //bla

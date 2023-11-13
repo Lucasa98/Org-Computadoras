@@ -40,7 +40,4 @@ mem Memory(
     .o_Tx(Tx)
 );
 
-assign sal = s_writeData;
-assign addressSal = s_address;
-
 endmodule

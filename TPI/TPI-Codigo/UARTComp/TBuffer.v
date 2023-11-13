@@ -3,7 +3,7 @@ module TBuffer(
     input wire wr,            //señal de escritura
     input wire rd,            //señal de lectura ("borra" el registro leido)
     input [7:0] w_data,       //dato de escritura
-    input [2:0] address,      //Dirección de escritura
+    input [3:0] address,      //Dirección de escritura
     output reg [7:0] r_data,  //dato de lectura
     output wire full,         //bandera de llena
 
@@ -31,7 +31,7 @@ end
 // Escritura
 always@(posedge rd)
 begin
-    if(rd & full)      //si el transmitter leyo un dato, avanzamos el puntero de lectura
+    if(rd && full)      //si el transmitter leyo un dato, avanzamos el puntero de lectura
     begin
         r_ptr = r_ptr + 1;
         if(r_ptr > 3)   //si el transmitter leyo todos los datos, reiniciamos
@@ -45,7 +45,7 @@ end
 
 always@(posedge wr)
 begin
-    if(wr & ~full)
+    if(wr && ~full)
     begin
         buffer[address-6] = w_data;
         count_w = count_w + 1;

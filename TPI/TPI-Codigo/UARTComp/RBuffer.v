@@ -1,5 +1,6 @@
 module RBuffer(
     input clk,
+    input wire WE,
     input wire wr,            //señal de escritura
     input [7:0] w_data,       //dato de escritura
     input [2:0] address,      //Dirección de lectura
@@ -45,6 +46,8 @@ end
 always@(*)
 begin
     r_data <= buffer[address];
+    if(WE)
+        buffer[5] = 0;
     DEBUGBuffer0 <= buffer[0];
     DEBUGBuffer1 <= buffer[1];
     DEBUGBuffer2 <= buffer[2];

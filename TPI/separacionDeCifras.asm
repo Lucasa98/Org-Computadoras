@@ -54,6 +54,7 @@ div3:	blt x23,x7,fin3	#while(x23 >= 10)
 	addi x24,x24,1	#x24++
 	jal div3
 fin3:	#mandar a la uart
+	nop
 	sw x21, 24(x11)
 	sw x22, 28(x11)
 	sw x23, 32(x11)

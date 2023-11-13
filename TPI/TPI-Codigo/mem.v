@@ -30,6 +30,7 @@ wire[31:0] s_UARTdata;
 // Memory Mapping (MMU)
 MMU memory_mapping(
     .address_virtual(address_virtual),
+    .we(WE),
     .block_select(block_select),
     .address_physical(address_physical),
     .DataEnable(DataEnable),
