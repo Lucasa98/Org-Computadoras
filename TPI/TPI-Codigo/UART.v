@@ -59,7 +59,7 @@ RBuffer rbuffer(
     .clk(clk),
     .wr(s_rx_done_tick),
     .w_data(s_dout),
-    .address(address[2:0]),
+    .address(address[4:2]),
     .r_data(readAux),
 
     .DEBUGBuffer0(DEBUGBuffer0),
@@ -75,7 +75,7 @@ TBuffer tbuffer(
     .wr(we),
     .rd(s_tx_done_tick),
     .w_data(writeDataAux),
-    .address(address[2:0]),
+    .address(address[4:2]),
     .r_data(s_din),
     .full(s_tx_start)
 );

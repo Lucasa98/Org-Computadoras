@@ -7,14 +7,14 @@ module Converter(
 
 initial
 begin
-    o_8bits = 0;
-    o_32bits = 0;
+    o_8bits <= 0;
+    o_32bits <= 0;
 end
 
 always@(*)
 begin
-    o_8bits <= i_32bits[7:0];
-    o_32bits[7:0] <= i_8bits;
+    o_8bits <= i_32bits;
+    o_32bits <= i_8bits;
 end
 
 endmodule

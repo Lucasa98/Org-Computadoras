@@ -17,14 +17,15 @@ module UC(
 );
 
 wire[1:0] ALUop;
-/* initial
-begin
-    ALUop <= 0;
-end */
+wire s_branch;
+reg r_branch;
+
+initial
+    r_branch = 0;
 
 mainDeco MainDecoder(
     .op(op),
-    .branch(branch),
+    .branch(s_branch),
     .jump(jump),
     .resSrc(resSrc),
     .memWrite(memWrite),
@@ -42,4 +43,8 @@ aluDeco ALUDecoder(
     .aluControl(ALUcontrol)
 );
 
+always @(*)
+    r_branch = s_branch && zero;
+
+assign branch = r_branch;
 endmodule

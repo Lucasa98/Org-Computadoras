@@ -7,24 +7,50 @@ module ALU(
 );
 
 reg [31:0] aux = 0;
+reg aux_zero = 0;
 
 always @(*)
 begin
     case (ALUControl)
         3'b000:
-            aux = srcA+srcB;
+            begin
+                aux = srcA+srcB;
+                aux_zero <= 0;
+            end
         3'b001:
-            aux = srcA-srcB;
+            begin
+                aux = srcA-srcB;
+                aux_zero <= 0;
+            end
         3'b010:
-            aux = srcA && srcB;
+            begin
+                aux = srcA && srcB;
+                aux_zero <= 0;
+            end
         3'b011:
-            aux = srcA || srcB;
+            begin
+                aux = srcA || srcB;
+                aux_zero <= 0;
+            end
+        3'b100:
+            begin
+                aux_zero <= srcA == srcB;
+            end
+        3'b101:
+            begin
+                aux = srcB > srcA;
+                aux_zero <=  srcB > srcA;
+            end
         default:
-            aux = srcA;
+            begin
+                aux = srcA;
+                aux_zero <= 0;
+            end
     endcase
+    
 end
 
-assign zero = 0;
+assign zero = aux_zero;
 assign res = aux;
 
 endmodule

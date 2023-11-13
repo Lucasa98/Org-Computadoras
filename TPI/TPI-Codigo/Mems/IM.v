@@ -3,7 +3,6 @@ module IM(
     input [15:0] pc,
     output [31:0] instr
 );
-//hay que hardcodear todas las innstrucciones xddddddd
 
 parameter ROM_WIDTH = 32;
 parameter ROM_ADDR_BITS = 8;
@@ -12,7 +11,6 @@ reg [ROM_WIDTH-1:0] ROM [(2**ROM_ADDR_BITS)-1:0];
 
 initial begin
     ROM[0] = 32'h000085B7;	//direccion de la uart
-   // ROM[1] = 
     ROM[4] = 32'h0145a803;
     ROM[8] = 32'hfe080ee3;
     ROM[12] = 32'h0005a603;

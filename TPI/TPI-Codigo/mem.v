@@ -23,10 +23,9 @@ wire[15:0] address_physical;
 wire DataEnable;
 wire StackEnable; 
 wire UARTEnable;
+wire[31:0] s_DMdata;
+wire[31:0] s_UARTdata;
 // ---------- ---------- ----------
-// ----------- Banderas -----------
-wire Rfull;
-// ----------- -------- -----------
 
 // Memory Mapping (MMU)
 MMU memory_mapping(
@@ -44,7 +43,7 @@ DM dataMem(
     .address(address_physical),
     .wd(writeData),
     .we(DataEnable), 
-    .rd(readData)
+    .rd(s_DMdata)
 );
 
 
@@ -55,7 +54,7 @@ UART UartModule(
     .address(address_physical),
     .w_data(writeData),
     .we(UARTEnable),
-    .r_data(readData),
+    .r_data(s_UARTdata),
     .o_Tx(o_Tx)
 );
 
@@ -63,6 +62,13 @@ UART UartModule(
 IM instrMem(
     .pc(pc),
     .instr(instr)
+);
+
+Mu4 multiplexor(
+    .e1(s_DMdata),
+    .e3(s_UARTdata),
+    .sel(block_select),
+    .sal(readData)
 );
 
 endmodule

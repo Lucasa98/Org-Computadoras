@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
+[*] Fri Nov 10 23:36:59 2023
+[*]
+[dumpfile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\Top_tb.vcd"
+[dumpfile_mtime] "Fri Nov 10 23:29:54 2023"
+[dumpfile_size] 775236763
+[savefile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\TPI\TPI-Codigo\Top_tb.gtkw"
+[timestart] 484699
+[size] 1254 600
+[pos] -91 246
+*-9.032661 485300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] Top_tb.
+[treeopen] Top_tb.UUT.
+[treeopen] Top_tb.UUT.RV.
+[treeopen] Top_tb.UUT.RV.unitControl.
+[sst_width] 197
+[signals_width] 248
+[sst_expanded] 1
+[sst_vpaned_height] 153
+@28
+Top_tb.clk
+@24
+Top_tb.UUT.RV.pc[15:0]
+@22
+Top_tb.UUT.RV.DataPath.instr[31:0]
+@24
+Top_tb.UUT.RV.DataPath.regBank.wd3[31:0]
+Top_tb.UUT.RV.DataPath.regBank.a1[4:0]
+Top_tb.UUT.RV.DataPath.regBank.a2[4:0]
+Top_tb.UUT.RV.DataPath.regBank.a3[4:0]
+Top_tb.UUT.RV.DataPath.regBank.rd1[31:0]
+Top_tb.UUT.RV.DataPath.regBank.rd2[31:0]
+@29
+Top_tb.UUT.RV.unitControl.MainDecoder.jump
+[pattern_trace] 1
+[pattern_trace] 0
