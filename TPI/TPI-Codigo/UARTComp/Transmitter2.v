@@ -1,5 +1,10 @@
-module transmitter2(
-    input wire clk, reset,
+module Transmitter2
+#(
+    parameter   DBIT = 8,
+                SB_TICK = 16
+)
+(
+    input wire clk,
     input wire tx_start , s_tick,
     input wire [7:0] din,
     output reg tx_done_tick,
@@ -19,24 +24,23 @@ reg [2:0] n_reg, n_next;
 reg [7:0] b_reg, b_next;
 reg tx_reg, tx_next;
 
+initial
+begin
+    state_reg <= idle;
+    s_reg <= 0;
+    n_reg <= 0;
+    b_reg <= 0;
+    tx_reg <= 1'b1;
+end
 // body
-always @(posedge clk, posedge reset)
-    if (reset)
-        begin
-            state_reg <= idle;
-            s_reg <= 0;
-            n_reg <= 0;
-            b_reg <= 0;
-            tx_reg <= 1'b1;
-        end
-    else
-        begin
-            state_reg <= state_next;
-            s_reg <= s_next;
-            n_reg <= n_next;
-            b_reg <= b_next;
-            tx_reg <= tx_next;
-        end
+always @(posedge clk)
+    begin
+        state_reg <= state_next;
+        s_reg <= s_next;
+        n_reg <= n_next;
+        b_reg <= b_next;
+        tx_reg <= tx_next;
+    end
 // Maquina de estados
 always @*
     begin
@@ -46,43 +50,66 @@ always @*
     n_next = n_reg;
     b_next = b_reg;
     tx_next = tx_reg ;
-case (state-reg)
-idle :
-begin
-tx-next = l'bl;
-if (tx-start)
-begin
-state-next = start;
-s-next = 0;
-b-next = din;
+    case (state_reg)
+        idle :
+        begin
+            tx_next = 1'b1;
+            if (tx_start)
+                begin
+                    state_next = start;
+                    s_next = 0;
+                    b_next = din;
+                end
+        end
+        start :
+        begin
+            tx_next = 1'b0;
+            if (s_tick)
+            begin
+                if (s_reg==15)
+                begin
+                    state_next = data;
+                    s_next = 0;
+                    n_next = 0;
+                end
+            else
+                s_next = s_reg + 1;
+            end
+        end
+        data:
+        begin
+            tx_next = b_reg [0];
+            if (s_tick)
+            begin
+                if (s_reg==15)
+                begin
+                    s_next = 0;
+                    b_next = b_reg >> 1;
+                    if (n_reg==(DBIT-1))
+                        state_next = stop ;
+                    else
+                    n_next = n_reg + 1;
+                end
+            else
+                s_next = s_reg + 1;
+            end
+        end
+        stop :
+        begin
+            tx_next = 1'b1;
+            if (s_tick)
+            begin
+                if (s_reg==(SB_TICK -1))
+                begin
+                    state_next = idle;
+                    tx_done_tick = 1'b1;
+                end
+            else
+                s_next = s_reg + 1;
+            end
+        end
+    endcase
 end
-end
-start :
-begin
-tx-next = l'bO;
-if (s-tick)
-if (s_reg==15)
-begin
-state-next = data;
-s-next = 0;
-n-next = 0;
-end
-else
-s-next = s-reg + 1;
-end
-data:
-begin
-tx-next = b-reg [O] ;
-if (s-tick)
-if (s_reg==15)
-begin
-s-next = 0;
-b-next = b-reg >> 1;
-if (n-reg==(DBIT-1))
-state-next = stop ;
-else
-n-next = n-reg + 1;
-end
-else
-s-next = s-reg + 1;
+// output
+assign tx = tx_reg;
 endmodule

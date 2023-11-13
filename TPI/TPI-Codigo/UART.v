@@ -1,7 +1,8 @@
 `include "UARTComp/RBuffer.v"
 `include "UARTComp/TBuffer.v"
-`include "UARTComp/Receiver.v"
-`include "UARTComp/Transmitter.v"
+`include "UARTComp/RateGenerator.v"
+`include "UARTComp/Receiver2.v"
+`include "UARTComp/Transmitter2.v"
 `include "UARTComp/Converter.v"
 
 module UART(
@@ -27,6 +28,7 @@ wire s_rx_done_tick;
 wire[7:0] s_din;
 wire s_tx_done_tick;
 wire s_tx_start;
+wire s_tick;
 
 wire [7:0]readAux;
 wire [7:0]writeDataAux;
@@ -40,19 +42,26 @@ Converter Conv(
     .o_32bits(r_data)
 );
 
-Receiver receiver(
+RateGenerator baudGen(
     .clk(clk),
-    .i_Rx(i_Rx),
-    .Rx_done_tick(s_rx_done_tick),
+    .tick(s_tick)
+);
+
+Receiver2 receiver(
+    .clk(clk),
+    .rx(i_Rx),
+    .s_tick(s_tick),
+    .rx_done_tick(s_rx_done_tick),
     .dout(s_dout)
 );
 
-Transmitter transmitter(
+Transmitter2 transmitter(
     .clk(clk),
-    .o_Tx(o_Tx),
+    .tx_start(s_tx_start),
+    .s_tick(s_tick),
     .din(s_din),
     .tx_done_tick(s_tx_done_tick),
-    .tx_start(s_tx_start)
+    .tx(o_Tx)
 );
 
 RBuffer rbuffer(

@@ -1,36 +1,38 @@
 [*]
 [*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
-[*] Mon Nov 13 14:03:18 2023
+[*] Mon Nov 13 17:37:12 2023
 [*]
 [dumpfile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\Git\Org-Computadoras\TPI\TPI-Codigo\Top_tb.vcd"
-[dumpfile_mtime] "Mon Nov 13 13:57:45 2023"
-[dumpfile_size] 562469264
+[dumpfile_mtime] "Mon Nov 13 17:22:11 2023"
+[dumpfile_size] 162394193
 [savefile] "C:\Users\lusau\OneDrive\Desktop\Lucas\Facu\6º\Organizacion de las Computadoras\Git\Org-Computadoras\TPI\TPI-Codigo\Top_tb.gtkw"
-[timestart] 1203703
-[size] 1254 600
-[pos] -1 -1
-*-9.032661 1204210 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 63144380
+[size] 1254 657
+[pos] -95 -5
+*-11.040043 63146840 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] Top_tb.
 [treeopen] Top_tb.UUT.
-[treeopen] Top_tb.UUT.Memory.
-[treeopen] Top_tb.UUT.Memory.UartModule.
 [treeopen] Top_tb.UUT.RV.
+[treeopen] Top_tb.UUT.RV.DataPath.
 [sst_width] 197
 [signals_width] 248
 [sst_expanded] 1
-[sst_vpaned_height] 153
+[sst_vpaned_height] 173
 @28
 Top_tb.clk
+Top_tb.Rx
 @24
-Top_tb.UUT.RV.pc[15:0]
+Top_tb.UUT.s_pc[15:0]
 @22
-Top_tb.UUT.RV.DataPath.instr[31:0]
+Top_tb.UUT.s_instr[31:0]
 @24
-Top_tb.UUT.Memory.UartModule.tbuffer.DEBUGbuffer0[7:0]
-Top_tb.UUT.Memory.UartModule.tbuffer.DEBUGbuffer1[7:0]
-Top_tb.UUT.Memory.UartModule.tbuffer.DEBUGbuffer2[7:0]
-Top_tb.UUT.Memory.UartModule.tbuffer.DEBUGbuffer3[7:0]
-Top_tb.UUT.Memory.UartModule.tbuffer.w_data[7:0]
-Top_tb.UUT.Memory.UartModule.tbuffer.count_w[2:0]
+Top_tb.UUT.RV.DataPath.regBank.a1[4:0]
+Top_tb.UUT.RV.DataPath.regBank.a2[4:0]
+Top_tb.UUT.RV.DataPath.regBank.a3[4:0]
+Top_tb.UUT.RV.DataPath.regBank.rd1[31:0]
+Top_tb.UUT.RV.DataPath.regBank.rd2[31:0]
+Top_tb.UUT.RV.DataPath.regBank.wd3[31:0]
+@22
+Top_tb.UUT.Memory.UartModule.rbuffer.DEBUGBuffer5[7:0]
 [pattern_trace] 1
 [pattern_trace] 0
