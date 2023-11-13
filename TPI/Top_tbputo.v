@@ -14,14 +14,16 @@ always #0.1 clk = ~clk;
 
 // Top ports
 //Salidas
-wire[31:0] sal;
-wire[15:0] addressSal;
+wire rx;
+wire tx;
 
 //-- Instantiate the unit to test
 Top UUT (
     .clk(clk),
-    .sal(sal),
-    .addressSal(addressSal)
+    .Rx(rx),
+
+    //Salidas
+    .Tx(tx)
 );
 
 initial begin
@@ -29,7 +31,131 @@ initial begin
     $dumpfile(`DUMPSTR(`VCD_OUTPUT));
     $dumpvars(0, Top_tb);
 
-    
+     //Enviaremos 8'b00110101 = 5
+    #2
+    //start-bit
+    Rx = 0;
+    //Data
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    //Stop-bit
+    #8
+    Rx = 1;
+
+    //Enviaremos 8'b00110110 = 6
+    #8
+    //start-bit
+    Rx = 0;
+    //Data
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    //Stop-bit
+    #8
+    Rx = 1;
+
+    //Enviaremos 8'b00101010 = *
+    #8
+    //start-bit
+    Rx = 0;
+    //Data
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    //Stop-bit
+    #8
+    Rx = 1;
+
+    //Enviaremos 8'b00111001 = 9
+    #8
+    //start-bit
+    Rx = 0;
+    //Data
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 1;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    //Stop-bit
+    #8
+    Rx = 1;
+
+    //Enviaremos 8'b00110001 = 1
+    #8
+    //start-bit
+    Rx = 0;
+    //Data
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    #8
+    Rx = 1;
+    #8
+    Rx = 1;
+    #8
+    Rx = 0;
+    #8
+    Rx = 0;
+    //Stop-bit
+    #8
+    Rx = 1;
+
 
     #(DURATION) $display("End of simulation");
     $finish;
