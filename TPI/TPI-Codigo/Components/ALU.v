@@ -47,7 +47,6 @@ begin
                 aux_zero <= 0;
             end
     endcase
-    
 end
 
 assign zero = aux_zero;
