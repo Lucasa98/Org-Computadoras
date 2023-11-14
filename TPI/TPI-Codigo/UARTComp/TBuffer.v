@@ -25,11 +25,11 @@ begin
     count_w <= 0;
     r_ptr <= 0;
     r_data <= 0;
-    aux_full <= 0;
+    aux_full = 0;
 end
 
 // Escritura
-always@(posedge rd)
+always@(posedge clk)
 begin
     if(rd && full)      //si el transmitter leyo un dato, avanzamos el puntero de lectura
     begin
