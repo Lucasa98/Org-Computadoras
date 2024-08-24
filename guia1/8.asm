@@ -1,11 +1,11 @@
 .text
-#cargar direccion del primer dato de el data segment
-lui t0, 0x10010
-
-#cargar datos a guardar
-lui t1, 0xABCD0
-lui t2, 0x12340
-
-#almacenar datos
-sw t1, 0(t0)
-sw t2, 4(t0)
+	# Guardamos la direccion del Data Segment
+	lui a1, 0x10010
+	# Guardamos 0xABCD0000 en t0
+	lui t0, 0xABCD0
+	# Almacenamos el valor de t0 en (a1)
+	sw t0, 0(a1)
+	# Guardamos 0x12340000 en t0
+	lui t0, 0x12340
+	# Almacenamos el valor de t0 en (a1)+4
+	sw t0, 4(a1)
