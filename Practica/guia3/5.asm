@@ -4,27 +4,26 @@ dato2: .word 13
 res: .space 4
 mod: .space 4
 .text
-	lw t1, dato1		# guarda en t1 el valor en dato1
-	lw t2, dato2		# guarda en t2 el valor en dato2
-	and a0, zero, zero	# guarda 0 en a0
-	and a1, zero, zero	# guarda 0 en a0
-si:	beq t2, zero, finsi	# if t2==zero -> finsi
-entonce:			# else{
-	div a0, t1, t2		# a0=t1/t2
-	rem a1, t1, t2		# a1=t1%t2 }
+	# carga dato1 y dato2 en t1 y t2
+	lw t1, dato1
+	lw t2, dato2
+	# a0 = 0; a1 = 0
+	and a0, zero, zero
+	and a1, zero, zero
+si:
+	# if(t2 == 0) jump(finsi)
+	beq t2, zero, finsi
+entonce:
+	# a0 = t1/t2
+	div a0, t1, t2
+	# a1 = t1%t2 (resto de t1/t2)
+	rem a1, t1, t2
 finsi:
-	sw a0, res, t0		# guarda a0 en res
-	sw a1, mod, t0		# guarda a1 en mod
+	# res = a0
+	sw a0, res, t0
+	# mod = a1
+	sw a1, mod, t0
 	nop
-
-#a)
-# Se esta comparando el denominador (dato2) con x0, para evitar la division
-# por 0
-
-#b)
-# las direcciones de dato1 y dato2 se puede saber con las instrucciones
-la t0, dato1	# 0x10010000
-la t1, dato2	# 0x10010004
-
-#c)
-# En res y mod se guardan la division entera y el resto (modulo) de 87/13
+	
+# El programa lo que hace es almacenar en res y mod el resultado
+# de la division de dato1 por dato2, siempre y cuando dato2 no sea cero

@@ -1,7 +1,15 @@
-addi t0, x0, 5
-addi t1, x0, 20
-sub t0, t1, t0
-
-#a)
-# El codigo generado solo cambio t0 y t1 por x5 y x6
-# No hay negativos...
+.text
+	# Codigo 1:
+	# Guardamos 20 en t0
+	addi t0, x0, 20
+	# Restamos 5 a 20 con addi
+	addi t0, t0, -5
+	
+	# Codigo 2:
+	# Guardamos 20 en t0
+	addi t0, x0, 20
+	# Guardamos 5 en t1
+	addi t1, x0, 5
+	# Restamos 5 a 20
+	sub t0, t0, t1
+	

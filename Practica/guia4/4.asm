@@ -1,22 +1,38 @@
 .data
-V: .space 60
+V: .word 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+size: .word 15
 A: .space 60
 
 .text
-	addi t3, zero, 60
-	la a0, V		# puntero a V
-	la a1, A		# puntero a A
+	# itV = V.begin()
+	la a0, V
+	# itA = A.begin()
+	la a1, A
+	lw t0, size
+	# t3 = 2
+	addi t3, zero, 2
 	
-	add t0, zero, zero	# contador
-for:	add t4, a0, t0		# *V[i]
-	lw t2, (t4)		# t2 = V[i]
+	# i = 0
+	addi t1, zero, 0
+for:	# for(i=0; i<size; ++i)
+	bge t1, t0, endfor
 	
-	andi t5, t2, 0x1	# mascara que guarda 1 si es impar
-	beqz t5, par		# if t2 es par
-	add t4, a1, t0		# else{ *A[i]
-	sw t2, (t4)		# A[i] = t2 }
+	# t2 = *itV
+	lw t2, (a0)
+	# t4 = t2%2
+	rem t4, t2, t3
+	# if(t2%2==0) *itA = t2
+	beqz t4, par
+	sw t2, (a1)
+par:
+	# ++itV
+	addi a0, a0, 4
+	# ++itA
+	addi a1, a1, 4
 	
-par:	addi t0, t0, 4		# i++
-	blt t0, t3, for
-end:	nop
-	
+	# ++i
+	addi t1, t1, 1
+	j for
+endfor:
+	addi a7, zero, 10
+	ecall

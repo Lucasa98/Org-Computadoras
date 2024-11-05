@@ -1,27 +1,54 @@
 .data
-cadena: .asciz "ORGANIZACION DE LAS COMPUTADORAS CON RISC V"
-#.align 2
+cadena: .asciz "ORGANIZACION DE LAS COMPUTADORAS EN RISC V"
+.align 2
 cant: .byte -1
-#.align 2
+.align 2
 caract: .ascii "A"
-#.align 2
-reemp: .ascii "x"
+.align 2
+val: .ascii "x"
 
 .text
+	###
+	lb t2, val
+	###
+	# direccion de memoria de la cadena
+	# a0 = *cadena
 	la a0, cadena
+	# direccion de memoria del caracter "A"
+	# t1 = caract
 	lb t1, caract
-	lb t2, reemp
-	ori a1, zero, 0		# contador c=0
-ini:	lb t0, 0(a0)		# carga la letra en t0
-	bne t0, t1, distin	# if t0!=caract -> distin
-	addi a1, a1, 1		# else{ c++
-	sb t2, 0(a0)		# }	<============================= Ej 8
-distin:	beq t0, zero, fin	# t0==0	-> fin
-	addi a0, a0, 1		# incremento solamente 1 byte t0++
+	# a1 = 0
+	ori a1, zero, 0	# contador
+ini:
+	# t0 = *a0
+	lb t0, 0(a0)
+	# if(t0 != t1) jump(distin)
+	bne t0, t1, distin
+	# else ++a1
+	addi a1, a1, 1
+	
+	### EJERCICIO 8
+	sb t2, 0(a0)
+	### FIN EJERCICIO 8
+distin:
+	# la unica forma de saber que termino la cadena es ver si
+	# el siguiente byte es 0
+	# if(t0==0) jump(fin)
+	beq t0, zero, fin
+	# else ++a0
+	addi a0, a0, 1	# incremento solamente 1 byte
 	j ini
-fin:	sw a1, cant, t6		# guardo la cantidad contada
-	la a0, cadena		# aca no se que hace
-	li a7, 4		# -
-	ecall			# -
-	ori a7, zero, 10	# -
-	ecall			# -
+fin:
+	# cant = a1
+	sw a1, cant, t6
+	# a0 = *cadena
+	la a0, cadena
+	# a7 = 4
+	li a7, 4
+	ecall
+	# a7 = 10
+	ori a7, zero, 10
+	ecall
+	
+# El programa cuenta la cantidad de apariciones
+# de apariciones de 'caract' en 'cadena'

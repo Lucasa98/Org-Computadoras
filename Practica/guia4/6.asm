@@ -1,17 +1,31 @@
 .data
-V: .word 1 2 3 4 5 6 7 8 9 10
+V: .word 100 101 102 103 104 105 106 107 108 109
 
 .text
-	la a0, V		# puntero a V
-	addi a1, zero, 40	# tamaño
-	addi t0, zero, 0	# contador i=0
-for:	add t1, a0, t0		# puntero a V[i]
-	lw t2, (t1)		# cargar V[i]
-	addi t3, zero, 8
-	mul t2, t2, t3		# V[i]*=8
-	sw t2, (t1)		# guardar V[i]*8
-	addi t0, t0, 4		# ++i
-	slt t2, a1, t0		# i < tamaño
-	beqz t2, for		# if i<tamaño -> for
-end:	nop			# else end
+	# it = V.begin()
+	la a0, V
+	# t0 = 0
+	addi t0, zero, 0
+	# t1 = 8
+	addi t1, zero, 8
+	# size = 10
+	addi s0, zero, 10
 	
+	# while(i<10)
+while:
+	bge t0, s0, endwhile
+	
+	# *it *= 8
+	lw t2, 0(a0)
+	mul t2, t2, t1
+	sw t2, 0(a0)
+	
+	# ++it
+	addi a0, a0, 4
+	# ++t0
+	addi t0, t0, 1
+	j while
+endwhile:
+	# return
+	addi a7, zero, 10
+	ecall

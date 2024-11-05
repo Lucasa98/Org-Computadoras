@@ -1,24 +1,37 @@
-# Es exactamente EL MISMO PROGRAMA QUE EN EL EJERCICIO 7
 .data
-cadena: .asciz "ORGANIZACION DE LAS COMPUTADORAS CON RISC V"
-#.align 2
-cant: .word
-#.align 2
-caract: .ascii "A"
+V: .ascii "hola soy re ascii jaja viste como e"
+.align 2
+carac: .byte 'a'
+.align 2
+total: .word
 
 .text
-	la a0, cadena
-	lb t1, caract
-	ori a1, zero, 0		# contador c=0
-ini:	lb t0, 0(a0)		# carga la letra en t0
-	bne t0, t1, distin	# if t0!=caract -> distin
-	addi a1, a1, 1		# else c++
-distin:	beq t0, zero, fin	# t0==0	-> fin
-	addi a0, a0, 1		# incremento solamente 1 byte t0++
+	# a0 = V.begin()
+	la a0, V
+	# s0 = carac
+	lb s0, carac
+	
+	# contador de caracteres iguales a 'carac'
+	addi t0, zero, 0
+	# t1 = *a0
+	lb t1, 0(a0)
+	
+ini:	# while(t1 != 0)
+	beq t1, zero, end
+	# if(t1 != s0) jump(diff)
+	bne t1, s0, diff
+	# else ++t0
+	addi t0, t0, 1
+	
+diff:		
+	# ++a0
+	addi a0, a0, 1
+	lb t1, 0(a0)
 	j ini
-fin:	sw a1, cant, t6		# guardo la cantidad contada
-	la a0, cadena		# aca no se que hace
-	li a7, 4		# -
-	ecall			# -
-	ori a7, zero, 10	# -
-	ecall			# -
+	
+end:
+	sw t0, total, t6
+	la t5, total
+	
+	addi a7, zero, 10
+	ecall

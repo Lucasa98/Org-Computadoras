@@ -1,20 +1,40 @@
 .data
-V: .word 1 2 3 0 0 6 7 8 9 10 11 12 13 14 0
-n: .byte 15
-total: .byte 0
+V: .word 0 1 2 3 4 5 6 0 8 9
+n: .word 10
+total: .space 4
 
 .text
-	la a1, V		# puntero a V[0]
-	lb s1, n		# tamanio de V
+	# a0 = V.begin()
+	la a0, V
+	# a1 = *total
+	la a1, total
+	# s0 = n
+	lw s0, n
 	
-	add t0, zero, zero	# i=0
-	add a0, zero, zero	# c=0
-	
-for:	bge t0, s1, end		# if i>=tam -> return
-	lw t1, 0(a1)		# aux=V[i]
-	bnez t1, nocero		# if aux!=0 -> nocero
-	addi a0, a0, 1		# else c++
-nocero:	addi a1, a1, 4
+	# contador de valores iguales a 0
+	addi t0, zero, 0
+	# contador del elementos recorridos
+	addi t1, zero, 0
+
+ini:	
+	bge t1, s0, end
+	# t2 = *a0
+	lw t2, 0(a0)
+	# if(t2 != 0) jump(nocero)
+	bne t2, zero, nocero
+	# else ++t0
 	addi t0, t0, 1
-	j for
-end:	sb a0, total, t6
+	
+nocero:
+	# ++a0
+	addi a0, a0 ,4
+	# ++t1
+	addi t1, t1, 1
+	j ini
+	
+end:
+	# almacenar t0 en 'total'
+	sw t0, 0(a1)
+	
+	addi a7, zero, 10
+	ecall

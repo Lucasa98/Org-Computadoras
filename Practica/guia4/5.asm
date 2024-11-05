@@ -1,19 +1,30 @@
 .data
-a: .word 9
-b: .word 7
-c: .word 13
+a: .word 4
+b: .word 5
+c: .word 3
 
 .text
+	# t0 = a
 	lw t0, a
-	lw t1, b
-	lw t2, c
-	add s0, zero, t0	# menor=a
-	slt t3, t1, s0
-	beqz t3, verif2		# if menor<b -> verif2
-	add s0, zero, t1	# else menor=b
-verif2: slt t3, t2, s0
-	beqz t3, end		# if menor<c -> end
-	add s0, zero, t2	# else menor=c
-end:	la a0, c
-	sw s0, 4(a0)		# guardamos el menor
-	nop
+	# s0 = b
+	lw s0, b
+	# s1 = c
+	lw s1, c
+	
+	# if(s0 >= t0) { // no reemplazar }
+	bge s0, t0, jump1
+	# else { // reemplazar }
+	add t0, zero, s0
+jump1:
+	# if(s1 >= t0) { // no reemplazar }
+	bge s1, t0, jump2
+	# else { // reemplazar }
+	add t0, zero, s1
+jump2:
+	# guardar en la posicion siguiente a c
+	la a1, c
+	sw t0, 4(a1)
+	
+	# return
+	addi a7, zero, 10
+	ecall

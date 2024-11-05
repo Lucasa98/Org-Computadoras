@@ -1,24 +1,38 @@
 .data
-data1: .word 3
-data2: .word 61
+val: 10
+mult: 61
+
 .text
-# multiplicar data1 por data2
-	lw t1, data1
-	lw t2, data2
-
-# Con ciclos
+	# s0 = *val
+	lw s0, val
+	# s1 = *mul
+	lw s1, mult
+	
+	# ///// version con ciclos (a0) /////
+	# a0 = 0
 	addi a0, zero, 0
-	addi t0, zero, 0	# contador c=0
-while:	blt t0, t2, do		# if c<data2 -> do
-	j end			# else return
-do:	add a0, a0, t1		#do: a0+=t1
-	addi t0, t0, 1		#    c++
-	j while
-end:	nop
-
-# Con desplazamientos
-	slli a0, t1, 6		# a0 = t1*64
-	sub a0, a0, t1		# a0 -= t1
-	sub a0, a0, t1		# a0 -= t1
-	sub a0, a0, t1		# a0 -= t1
+	# i = t0 = 0
+	addi t0, zero, 0
+for:
+	# if(i >= 61) jump(endfor)
+	bge t0, s1, endfor
+	
+	add a0, a0, s0
+	
+	addi t0, t0, 1
+	j for
+endfor:
+	# ///// version con desplazamientos (a1) /////
+	# t0 = 6
+	addi t0, zero, 6
+	# a1 = s0<<t0 === a1 = s0*64
+	sll a1, s0, t0
+	# a1 = a1 - 3*s0
+	sub a1, a1, s0
+	sub a1, a1, s0
+	sub a1, a1, s0
+	
+	# return
+	addi a7, zero, 10
+	ecall
 	
