@@ -10,6 +10,7 @@ Recursos de cursado de la materia
   - [Unidad 6: Microarquitectura Superescalar](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%206%20-%20Microarquitectura%20Superescalar.pdf)
   - [Unidad 7: Multihilo y Multinucleo](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%207%20-%20Arquitectura%20Multihilo%20y%20Multinucleo.pdf)
   - [Unidad 8: Organización de la Memoria](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%208%20-%20Organizaci%C3%B3n%20de%20la%20Memoria.pdf)
+  - [Unidad 9: Localidad y Memoria Caché](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%209%20-%20Localidad%20y%20Memoria%20Cache.pdf)
 - Guías de Práctica [Resueltas](https://github.com/Lucasa98/Org-Computadoras/tree/main/Practica)
 - Ejercicios de Examen con [Solución](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Practica%20de%20Examen.pdf)
 - Preguntas de Examen con [Respuestas](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Preguntas%20de%20Examen.pdf)
