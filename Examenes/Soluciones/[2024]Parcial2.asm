@@ -1,75 +1,112 @@
 .data
-G:		.word 0xA0000000
-B:		.word 0xA0000001
-R:		.word 0xA0000002
-TEXT_BUFFER:	.word 0x10010000  # Dirección del buffer de texto
-FONT_ROM:	.word 0x90000000  # Dirección base de la FontROM
-SCREEN_WIDTH:	.word 80          # Ancho de la pantalla (caracteres)
-SCREEN_HEIGHT:	.word 25          # Altura de la pantalla (caracteres)
-CHAR_HEIGHT:	.word 16          # Altura del carácter en píxeles
-CHAR_WIDTH:	.word 8           # Ancho del carácter en píxeles
+G:		.word 0xA0000000	# Verde
+B:		.word 0xA0000001	# Azul
+R:		.word 0xA0000002	# Rojo
+VIDEO_S:	.word 0xA0000003	# Seniales de video: {HS, VS, CLK}
+TEXT_BUFFER:	.word 0x10010000	# Dirección del buffer de texto
+FONT_ROM:	.word 0x90000000	# Dirección base de la FontROM
+WIDTH:		.word 640		# Ancho de la pantalla en pixeles
+HEIGHT:		.word 400		# Altura de la pantalla en pixeles
 
 .text
-	la t0, TEXT_BUFFER      # t0 apunta al buffer de texto
-	la t1, FONT_ROM         # t1 apunta a la FontROM
-	li t2, 80               # t2 = ancho de la pantalla en caracteres
-	li t3, 25               # t3 = altura de la pantalla en caracteres
-	li t4, 16               # t4 = altura de cada carácter en píxeles
-	li t5, 8                # t5 = ancho de cada carácter en píxeles
-
-# while(fila != 25)
-rows:
-	li s0, 0                # contador de fila
-	li s1, 0                # contador de columna
+	la a0, TEXT_BUFFER      # a0 apunta al buffer de texto
+	la a1, FONT_ROM         # a1 apunta a la FontROM
+	la a2, VIDEO_S		# a2 apunta a las seniales de video
+	la a5, G		# a5 apunta al verde
 	
-	# while(columna != 80)
-	columns:
-		# Leer el caracter del buffer de texto
-		lw a0, 0(t0)            # Leer caracter (ASCII)
-		addi t0, t0, 4          # Avanzar al siguiente caracter
+	lw t4, WIDTH		# t4 = ancho de la pantalla en pixeles
+	lw t5, HEIGHT		# t5 = altura de la pantalla en pixeles
+	
+	add s0, x0, x0		# s0 = contador de filas (scan line counter)
+	add s1, x0, x0		# s1 = contador de puntos (dot counter)
+	
+	# iniciar en el primer punto de la primer fila
+	addi s2, x0, 0x3	# HS:1, VS:1, CLK:0
+	sw s2, 0(a2)
+	add s2, x0, x0		# HS:0, vS:0, CLK:0
+	sw s2, 0(a2)
+
+for_row:
+	beq s0, t5, endfor_row
+		# HS:0, VS:0, CLK: 0
+		add s2, x0, x0
+		sw s2, 0(a2)
 		
-		# Leer caracter en FontROM
-		mul a1, a0, t4          # Desplazamiento en FontROM (ASCII * 16)
-		add a1, t1, a1          # Dirección base del caracter (primer fila)
+	for_col:
+		beq s1, t4, endfor_col
+			# HS:0, VS:0, CLK: 0
+			add s2, x0, x0
+			sw s2, 0(a2)
 		
-		# Renderizar el carácter fila por fila
-		add s2, x0, a1		# Apuntar a la FontROM del carácter
-		li s3, 0		# Contador de filas del carácter
-
-		# while(char != 16)
-		char:
-			lbu a2, 0(s2)           # Leer fila de píxeles del carácter
-			addi s2, s2, 1          # Avanzar a la siguiente fila
-			add s4, x0, a2		# Guardar fila de píxeles en s4
-			li s5, 0                # Contador de bits por fila
-
-			# while(pixel != 8)
-			pixel:
-				andi a3, s4, 0x80       # Extraer el bit más significativo
-				slli a3, a3, 7          # Ajustar el bit para RGB
-
-				sw a3, 0(s9)		# Enviar a la señal de video (Verde)
-				sw a3, 0(s10)		# Azul
-				sw a3, 0(s11)           # Rojo
-
-				slli s4, s4, 1          # Desplazar al siguiente bit (pixel)
-				addi s5, s5, 1          # Incrementar contador
-				bne s5, t5, pixel	# Repetir para 8 pixeles
-			# endwhile pixel
+			# /////////< identificar caracter ///////////
 			
-			addi s3, s3, 1          # Incrementar fila del carácter
-			bne s3, t4, char	# Repetir para 16 filas
-		# endwhile char
+			# character col
+			srli s3, s1, 3		# s3: char_col = dot/8 = dot >> 3
 			
-		# Avanzar a la siguiente columna
+			# character row
+			srli s4, s0, 4		# s4: char_row = line/16 = line >> 4
+			
+			# Posicion en el text buffer
+			slli s5, s4, 6		# s5 = char_row*64 = char_row << 6
+			slli s6, s4, 4		# s6 = char_row*16 = char_row << 4
+			add s5, s4, s5		# s5 = char_row*64 + char_row*16 = char_row*80
+			add s5, s5, s3		# char_pos = char_row*80 + char_col
+			
+			# Caracter
+			add a3, a0, s5		# direccion
+			lb s5, 0(a3)		# s5 = ASCII
+			# /////////> identificar caracter ///////////
+				
+			# /////////< identificar punto en matriz de caracter ///////////
+			# dot_row = line%16 = line - char_row << 4
+			slli s6, s4, 4		# s6 = char_row << 4
+			sub s6, s0, s6		# s6: dot_row
+			
+			# dot_col = dot%8 = dot - char_col << 3
+			slli s7, s3, 3		# s7 = char_col << 3
+			sub s7, s1, s7		# s7 : dot_col
+			
+			# /////////> identificar punto en matriz de caracter ///////////
+			
+			# /////////< cargar bit de punto ///////////
+			# matriz = FontROM + ASCII*16
+			slli a4, s5, 4		# a4 = ASCII*16 = ASCII << 4
+			add a4, a4, a1		# a4: matriz
+			# byte = matriz + dot_row
+			add a4, a4, s6		# a4: byte
+			# cargar byte
+			lb s8, 0(a4)
+			# pixel = byte[dot_col]
+			srl s8, s8, s7
+			andi s8, s8, 0x1	# s8: pixel
+			# /////////> cargar bit de punto ///////////
+			
+			# /////////< dibujar ///////////
+			add s9, x0, x0
+			beqz s8, negro
+			addi s9, x0, 0xff	# s9 = 1111 1111
+		negro:
+			sb s9, 0(a5)		# verde
+			sb s9, 1(a5)		# azul
+			sb s9, 2(a5)		# rojo
+			# /////////> dibujar ///////////
+		
+			# HS:0, VS:0, CLK: 1
+			addi s2, x0, 0x4
+			sw s2, 0(a2)
 		addi s1, s1, 1
-		bne s1, t2, columns
-	# endwhile columns
+		j for_col
+	endfor_col:
 		
-	# Avanzar a la siguiente fila
+		# VS:0, HS:1, CLK:0
+		addi s2, x0, 0x2
+		sw s2, 0(a2)
+	
 	addi s0, s0, 1
-	bne s0, t3, rows
-# endwhile rows
+	j for_row
+endfor_row:
 
-	# Repetir
-	j rows
+	# VS:0, HS:0, CLK: 0
+	add s2, x0, x0
+	sw s2, 0(a2)
+
