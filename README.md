@@ -13,6 +13,7 @@ Recursos de cursado de la materia
   - [Unidad 9: Localidad y Memoria Caché](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%209%20-%20Localidad%20y%20Memoria%20Cache.pdf)
   - [Unidad 10: Gestión de Periféricos](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%2010%20-%20Gesti%C3%B3n%20de%20Perif%C3%A9ricos.pdf)
   - [Unidad 11: Interrupciones y Excepciones](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%2011%20-%20Interrupciones%20y%20Excepciones.pdf)
+  - [Unidad 12: Video](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%2012%20-%20Video.pdf)
   - [Unidad 13: Puertos](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%2013%20-%20Puertos.pdf)
 - Guías de Práctica [Resueltas](https://github.com/Lucasa98/Org-Computadoras/tree/main/Practica)
 - Ejercicios de Examen con [Solución](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Practica%20de%20Examen.pdf)
