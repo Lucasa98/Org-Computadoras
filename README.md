@@ -16,6 +16,5 @@ Recursos de cursado de la materia
   - [Unidad 12: Video](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%2012%20-%20Video.pdf)
   - [Unidad 13: Puertos](https://github.com/Lucasa98/Org-Computadoras/blob/main/Teoria/Unidad%2013%20-%20Puertos.pdf)
 - Guías de Práctica [Resueltas](https://github.com/Lucasa98/Org-Computadoras/tree/main/Practica)
-- Ejercicios de Examen con [Solución](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Practica%20de%20Examen.pdf)
-- Preguntas de Examen con [Respuestas](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Preguntas%20de%20Examen.pdf)
+- Soluciones de Examen ([Teoría](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Preguntas%20de%20Examen.pdf)) ([Práctica](https://github.com/Lucasa98/Org-Computadoras/blob/main/Examenes/Soluciones/Practica%20de%20Examen.pdf))
 - Trabajo Práctico Integrador ([2023](https://github.com/Lucasa98/Org-Computadoras/tree/main/TPI%20(2023)))([2024](https://github.com/hPixal/simple-risc-v))
